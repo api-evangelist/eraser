@@ -1,0 +1,117 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/eraser/main/json-schema/eraser-file-schema.json",
+  "title": "Eraser File",
+  "description": "Schema for an Eraser file object with metadata and optional content",
+  "type": "object",
+  "required": ["id", "fileUrl", "title", "author", "createdAt", "updatedAt", "linkAccess"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique file identifier"
+    },
+    "fileUrl": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL to view the file in Eraser"
+    },
+    "title": {
+      "type": "string",
+      "description": "File name"
+    },
+    "author": {
+      "type": "string",
+      "description": "Creator's user ID"
+    },
+    "folderId": {
+      "type": ["string", "null"],
+      "description": "Parent folder ID, or null if at root"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 creation timestamp"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 last modification timestamp"
+    },
+    "linkAccess": {
+      "type": "string",
+      "enum": [
+        "no-link-access",
+        "anyone-with-link-can-edit",
+        "publicly-viewable",
+        "publicly-editable",
+        "sso-readable",
+        "sso-editable"
+      ],
+      "description": "File link access permission level"
+    },
+    "content": {
+      "type": "object",
+      "description": "File content (present in single-file responses)",
+      "properties": {
+        "document": {
+          "type": "string",
+          "description": "Markdown content of the file's document"
+        },
+        "elements": {
+          "type": "array",
+          "description": "Canvas elements in the file",
+          "items": {
+            "$ref": "#/$defs/CanvasElement"
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "CanvasElement": {
+      "type": "object",
+      "required": ["id", "type"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique element identifier"
+        },
+        "type": {
+          "type": "string",
+          "description": "Element category (e.g., diagram, rectangle, ellipse)"
+        },
+        "diagramType": {
+          "type": "string",
+          "enum": [
+            "sequence-diagram",
+            "entity-relationship-diagram",
+            "cloud-architecture-diagram",
+            "flowchart-diagram",
+            "bpmn-diagram"
+          ],
+          "description": "Diagram type (required when type is 'diagram')"
+        },
+        "code": {
+          "type": "string",
+          "description": "Eraser DSL code for the diagram element"
+        },
+        "x": {
+          "type": "number",
+          "description": "Horizontal canvas position"
+        },
+        "y": {
+          "type": "number",
+          "description": "Vertical canvas position"
+        },
+        "width": {
+          "type": "number",
+          "description": "Element width in canvas units"
+        },
+        "height": {
+          "type": "number",
+          "description": "Element height in canvas units"
+        }
+      }
+    }
+  }
+}

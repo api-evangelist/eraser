@@ -48,6 +48,8 @@ apis:
         url: https://docs.eraser.io/docs/eraser-api
       - type: OpenAPI
         url: https://app.eraser.io/.well-known/api-spec.json
+      - type: OpenAPI
+        url: openapi/eraser-eraser-api-openapi.yml
       - type: APIReference
         url: https://docs.eraser.io/reference
       - type: Quickstart

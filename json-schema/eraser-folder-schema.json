@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/eraser/main/json-schema/eraser-folder-schema.json",
+  "title": "Eraser Folder",
+  "description": "Schema for an Eraser folder used to organize files",
+  "type": "object",
+  "required": ["id", "name", "order", "teamId", "createdBy", "createdAt", "updatedAt"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique folder identifier"
+    },
+    "name": {
+      "type": "string",
+      "description": "Folder name"
+    },
+    "order": {
+      "type": "integer",
+      "description": "Sort order among sibling folders"
+    },
+    "teamId": {
+      "type": "string",
+      "description": "Team ID this folder belongs to"
+    },
+    "createdBy": {
+      "type": "string",
+      "description": "Creator's user ID"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 creation timestamp"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 last updated timestamp"
+    },
+    "parentFolderId": {
+      "type": ["string", "null"],
+      "description": "Parent folder ID, or null if root-level"
+    }
+  }
+}

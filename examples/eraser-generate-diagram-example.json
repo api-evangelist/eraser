@@ -1,0 +1,37 @@
+{
+  "title": "Generate Sequence Diagram from Natural Language",
+  "description": "Example of generating a sequence diagram using the AI prompt endpoint",
+  "request": {
+    "method": "POST",
+    "url": "https://app.eraser.io/api/render/prompt",
+    "headers": {
+      "Authorization": "Bearer YOUR_TEAM_API_TOKEN",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "text": "A user logs in to the web app, the web app sends credentials to the auth service, the auth service validates against the database, and returns a JWT token to the web app which redirects the user to the dashboard",
+      "diagramType": "sequence-diagram",
+      "mode": "premium",
+      "theme": "light",
+      "imageQuality": 2,
+      "fileOptions": {
+        "create": true,
+        "linkAccess": "publicly-viewable"
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "requestId": "req_abc123xyz",
+      "imageUrl": "https://app.eraser.io/diagrams/abc123.png",
+      "fileUrl": "https://app.eraser.io/workspace/team123/file456",
+      "diagrams": [
+        {
+          "diagramType": "sequence-diagram",
+          "code": "User -> WebApp: Login request\nWebApp -> AuthService: POST /auth/login {credentials}\nAuthService -> Database: Validate credentials\nDatabase --> AuthService: User record\nAuthService --> WebApp: JWT token\nWebApp --> User: Redirect to dashboard"
+        }
+      ]
+    }
+  }
+}

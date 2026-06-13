@@ -1,0 +1,203 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "schema": "https://schema.org/",
+    "eraser": "https://www.eraser.io/vocab#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "id": "@id",
+    "type": "@type",
+
+    "File": "eraser:File",
+    "Diagram": "eraser:Diagram",
+    "Folder": "eraser:Folder",
+    "AiRequest": "eraser:AiRequest",
+    "CanvasElement": "eraser:CanvasElement",
+    "AuditEvent": "eraser:AuditEvent",
+    "UsageMetrics": "eraser:UsageMetrics",
+    "MemberMetrics": "eraser:MemberMetrics",
+
+    "fileId": {
+      "@id": "eraser:fileId",
+      "@type": "xsd:string"
+    },
+    "fileUrl": {
+      "@id": "eraser:fileUrl",
+      "@type": "@id"
+    },
+    "title": {
+      "@id": "schema:name",
+      "@type": "xsd:string"
+    },
+    "author": {
+      "@id": "schema:author",
+      "@type": "xsd:string"
+    },
+    "folderId": {
+      "@id": "eraser:folderId",
+      "@type": "xsd:string"
+    },
+    "createdAt": {
+      "@id": "schema:dateCreated",
+      "@type": "xsd:dateTime"
+    },
+    "updatedAt": {
+      "@id": "schema:dateModified",
+      "@type": "xsd:dateTime"
+    },
+    "linkAccess": {
+      "@id": "eraser:linkAccess",
+      "@type": "xsd:string"
+    },
+    "document": {
+      "@id": "eraser:document",
+      "@type": "xsd:string"
+    },
+    "elements": {
+      "@id": "eraser:elements",
+      "@container": "@list"
+    },
+
+    "diagramId": {
+      "@id": "eraser:diagramId",
+      "@type": "xsd:string"
+    },
+    "diagramUrl": {
+      "@id": "eraser:diagramUrl",
+      "@type": "@id"
+    },
+    "diagramType": {
+      "@id": "eraser:diagramType",
+      "@type": "xsd:string"
+    },
+    "code": {
+      "@id": "eraser:dslCode",
+      "@type": "xsd:string"
+    },
+
+    "folderName": {
+      "@id": "eraser:folderName",
+      "@type": "xsd:string"
+    },
+    "parentFolderId": {
+      "@id": "eraser:parentFolderId",
+      "@type": "xsd:string"
+    },
+    "order": {
+      "@id": "eraser:sortOrder",
+      "@type": "xsd:integer"
+    },
+    "teamId": {
+      "@id": "eraser:teamId",
+      "@type": "xsd:string"
+    },
+    "createdBy": {
+      "@id": "schema:creator",
+      "@type": "xsd:string"
+    },
+
+    "requestId": {
+      "@id": "eraser:requestId",
+      "@type": "xsd:string"
+    },
+    "imageUrl": {
+      "@id": "eraser:imageUrl",
+      "@type": "@id"
+    },
+    "createEraserFileUrl": {
+      "@id": "eraser:createEraserFileUrl",
+      "@type": "@id"
+    },
+    "mode": {
+      "@id": "eraser:aiMode",
+      "@type": "xsd:string"
+    },
+    "inputs": {
+      "@id": "eraser:inputs",
+      "@container": "@list"
+    },
+    "outputs": {
+      "@id": "eraser:outputs",
+      "@container": "@list"
+    },
+    "diagrams": {
+      "@id": "eraser:generatedDiagrams",
+      "@container": "@list"
+    },
+
+    "eventType": {
+      "@id": "eraser:eventType",
+      "@type": "xsd:string"
+    },
+    "timestamp": {
+      "@id": "schema:dateCreated",
+      "@type": "xsd:dateTime"
+    },
+    "userId": {
+      "@id": "schema:identifier",
+      "@type": "xsd:string"
+    },
+    "events": {
+      "@id": "eraser:auditEvents",
+      "@container": "@list"
+    },
+    "nextCursor": {
+      "@id": "eraser:nextCursor",
+      "@type": "xsd:string"
+    },
+    "hasMore": {
+      "@id": "eraser:hasMore",
+      "@type": "xsd:boolean"
+    },
+
+    "range": {
+      "@id": "eraser:dateRange"
+    },
+    "aggregate": {
+      "@id": "eraser:teamAggregate"
+    },
+    "members": {
+      "@id": "eraser:teamMembers",
+      "@container": "@list"
+    },
+    "totalMembers": {
+      "@id": "eraser:totalMembers",
+      "@type": "xsd:integer"
+    },
+    "activeMembers": {
+      "@id": "eraser:activeMembers",
+      "@type": "xsd:integer"
+    },
+    "totalAiCreditsUsed": {
+      "@id": "eraser:aiCreditsUsed",
+      "@type": "xsd:integer"
+    },
+    "totalFiles": {
+      "@id": "eraser:totalFiles",
+      "@type": "xsd:integer"
+    },
+    "aiCreditsUsed": {
+      "@id": "eraser:memberAiCreditsUsed",
+      "@type": "xsd:integer"
+    },
+    "filesCreated": {
+      "@id": "eraser:filesCreated",
+      "@type": "xsd:integer"
+    },
+    "filesViewed": {
+      "@id": "eraser:filesViewed",
+      "@type": "xsd:integer"
+    },
+    "lastActive": {
+      "@id": "eraser:lastActive",
+      "@type": "xsd:dateTime"
+    },
+    "email": {
+      "@id": "schema:email",
+      "@type": "xsd:string"
+    },
+    "displayName": {
+      "@id": "schema:name",
+      "@type": "xsd:string"
+    }
+  }
+}

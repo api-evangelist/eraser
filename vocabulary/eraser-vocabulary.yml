@@ -1,0 +1,120 @@
+vocabulary:
+  - term: diagram
+    definition: >-
+      A visual representation generated from Eraser DSL code or AI prompts.
+      Supported types include flow charts, entity relationship diagrams (ERD),
+      sequence diagrams, cloud architecture diagrams, and BPMN swimlane diagrams.
+
+  - term: diagramType
+    definition: >-
+      The category of diagram to generate or manage. Valid values are
+      sequence-diagram, entity-relationship-diagram, cloud-architecture-diagram,
+      flowchart-diagram, bpmn-diagram, and freeform-diagram.
+
+  - term: eraserDsl
+    definition: >-
+      Eraser Domain Specific Language — the structured text-based syntax used
+      to define diagram elements, relationships, and layout on the Eraser canvas.
+
+  - term: file
+    definition: >-
+      An Eraser workspace document that can contain a document (markdown) and
+      canvas elements such as diagrams, shapes, and other visual components.
+
+  - term: fileId
+    definition: >-
+      The unique identifier assigned to an Eraser file, used to reference the
+      file in API calls for retrieval, update, and management operations.
+
+  - term: folder
+    definition: >-
+      An organizational container for Eraser files. Folders can be nested
+      using a parentFolderId to create hierarchical structures.
+
+  - term: folderId
+    definition: >-
+      The unique identifier assigned to an Eraser folder, used to organize
+      and filter files within the workspace.
+
+  - term: requestId
+    definition: >-
+      The unique identifier returned when a diagram is generated via the AI
+      prompt endpoint. Used to retrieve the AI request details and rendered
+      image at a later time.
+
+  - term: linkAccess
+    definition: >-
+      The sharing permission level for an Eraser file. Controls whether the
+      file is private, accessible via link, publicly viewable, or editable by
+      SSO users.
+
+  - term: aiCredits
+    definition: >-
+      Usage-based billing units consumed when generating diagrams or using
+      other AI-powered features through the Eraser API.
+
+  - term: mode
+    definition: >-
+      The AI model tier used for diagram generation. "standard" uses a faster,
+      lower-cost model while "premium" (default) uses a higher-quality model.
+
+  - term: canvasElement
+    definition: >-
+      An individual visual component placed on the Eraser canvas. Elements
+      have a type (e.g., diagram, rectangle, ellipse) and position coordinates.
+
+  - term: document
+    definition: >-
+      The markdown content area of an Eraser file. Supports embedded diagram
+      code blocks (e.g., ```sequence-diagram) which are converted to visual
+      diagram elements.
+
+  - term: auditLog
+    definition: >-
+      A tamper-evident record of user and administrative actions within an
+      Eraser team, available for compliance and security monitoring.
+
+  - term: eventType
+    definition: >-
+      A categorized action type recorded in audit logs, such as auth.login,
+      data.file.created, or iam.user.invited.
+
+  - term: contextId
+    definition: >-
+      An AI preset identifier used to provide specialized generation context,
+      such as specific diagram styles, templates, or organizational standards.
+
+  - term: gitContext
+    definition: >-
+      A reference to a Git repository provided as additional context when
+      generating diagrams from prompts, enabling codebase-aware diagram creation.
+
+  - term: imageQuality
+    definition: >-
+      A resolution multiplier (1, 2, or 3) controlling the output image
+      quality of generated diagrams. Higher values produce larger, sharper images.
+
+  - term: priorRequestId
+    definition: >-
+      The ID of a previous AI diagram generation request, used when making
+      iterative edits to an existing diagram via the prompt endpoint.
+
+  - term: cursor
+    definition: >-
+      An opaque pagination token returned in list responses (nextCursor field)
+      used to retrieve the subsequent page of results.
+
+  - term: teamId
+    definition: >-
+      The unique identifier for an Eraser team, used to scope API operations
+      and audit log filtering to a specific organization's workspace.
+
+  - term: bearerToken
+    definition: >-
+      The team-specific API authentication credential passed in the
+      Authorization header as "Bearer <token>" for all standard API endpoints.
+
+  - term: auditApiKey
+    definition: >-
+      A separate authentication credential required specifically for accessing
+      the audit log endpoint, distinct from the standard bearer token.

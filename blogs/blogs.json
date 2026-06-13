@@ -1,0 +1,13 @@
+{
+  "blogs": [
+    {
+      "name": "Eraser Decision Node Blog",
+      "description": "The official Eraser blog covering technical diagramming, AI-powered documentation, engineering workflows, and product updates.",
+      "url": "https://www.eraser.io/decision-node",
+      "rssUrl": null,
+      "rssDiscovered": false,
+      "lastChecked": "2026-06-13",
+      "notes": "No RSS/Atom feed found at standard paths (/feed, /feed.xml, /rss.xml, /decision-node/rss.xml, /blog/rss.xml). Blog is rendered as a standard web page without a discoverable syndication feed."
+    }
+  ]
+}

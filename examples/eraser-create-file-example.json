@@ -1,0 +1,46 @@
+{
+  "title": "Create a New Eraser File with Diagram",
+  "description": "Example of creating a new Eraser file with a document and embedded flow chart diagram",
+  "request": {
+    "method": "POST",
+    "url": "https://app.eraser.io/api/files",
+    "headers": {
+      "Authorization": "Bearer YOUR_TEAM_API_TOKEN",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "title": "System Architecture Overview",
+      "folderId": "folder_abc123",
+      "document": "# System Architecture\n\nThis document describes the high-level architecture of our system.\n\n```flowchart-diagram\nUser -> LoadBalancer\nLoadBalancer -> WebServer1\nLoadBalancer -> WebServer2\nWebServer1 -> Database\nWebServer2 -> Database\nDatabase -> Cache\n```",
+      "linkAccess": "anyone-with-link-can-edit"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "id": "file_xyz789",
+      "fileUrl": "https://app.eraser.io/workspace/team123/file_xyz789",
+      "title": "System Architecture Overview",
+      "author": "user_456",
+      "folderId": "folder_abc123",
+      "createdAt": "2026-06-13T10:00:00Z",
+      "updatedAt": "2026-06-13T10:00:00Z",
+      "linkAccess": "anyone-with-link-can-edit",
+      "content": {
+        "document": "# System Architecture\n\nThis document describes the high-level architecture of our system.",
+        "elements": [
+          {
+            "id": "elem_001",
+            "type": "diagram",
+            "diagramType": "flowchart-diagram",
+            "code": "User -> LoadBalancer\nLoadBalancer -> WebServer1\nLoadBalancer -> WebServer2\nWebServer1 -> Database\nWebServer2 -> Database\nDatabase -> Cache",
+            "x": 0,
+            "y": 400,
+            "width": 800,
+            "height": 600
+          }
+        ]
+      }
+    }
+  }
+}
