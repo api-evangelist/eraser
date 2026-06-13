@@ -1,0 +1,130 @@
+name: Eraser FinOps
+description: >-
+  FinOps framework for managing and optimizing Eraser API and platform costs.
+  Eraser uses a hybrid pricing model combining per-seat subscription fees with
+  usage-based billing for AI credits and API calls. Cost visibility and control
+  are provided through configurable monthly spending caps, 80% threshold alerts,
+  and monthly invoice summaries. Teams should monitor AI credit consumption and
+  API call volumes to avoid unexpected overages.
+url: https://docs.eraser.io/docs/usage-based-pricing
+specificationVersion: '1.0'
+framework: FinOps Framework 1.0 (FOCUS-aligned)
+costCategories:
+  - name: Subscription Costs
+    description: >-
+      Fixed per-seat monthly or annual subscription fees covering platform
+      access and bundled AI credit allowances.
+    type: fixed
+    billingModel: per-seat-subscription
+    services:
+      - name: Starter Plan
+        unitCost: 15.00
+        unit: member/month (annual)
+        currency: USD
+        annualEquivalent: 180.00
+      - name: Starter Plan (monthly billing)
+        unitCost: 20.00
+        unit: member/month
+        currency: USD
+      - name: Business Plan
+        unitCost: 45.00
+        unit: member/month (annual)
+        currency: USD
+        annualEquivalent: 540.00
+      - name: Business Plan (monthly billing)
+        unitCost: 60.00
+        unit: member/month
+        currency: USD
+      - name: Enterprise Plan
+        unitCost: custom
+        unit: negotiated
+        currency: USD
+  - name: Usage-Based API Costs
+    description: >-
+      Variable costs incurred per API call beyond plan subscription. Applies to
+      both AI-powered diagram generation and DSL rendering endpoints.
+      Usage-based billing must be explicitly enabled per team.
+    type: variable
+    billingModel: pay-per-use
+    services:
+      - name: AI Diagram Generation API (/render/prompt)
+        unitCost: 0.80
+        unit: per API call
+        currency: USD
+        bulkRate: 80.00
+        bulkUnit: per 100 calls
+      - name: DSL Diagram Rendering API (/render/elements)
+        unitCost: 0.20
+        unit: per API call
+        currency: USD
+        bulkRate: 20.00
+        bulkUnit: per 100 calls
+  - name: AI Credit Overage Costs
+    description: >-
+      Charges for AI diagram generation credits consumed beyond the monthly
+      plan allowance. Only applicable on paid plans with usage-based billing
+      enabled.
+    type: variable
+    billingModel: pay-per-use
+    services:
+      - name: AI Credits Overage
+        unitCost: 0.60
+        unit: per credit
+        currency: USD
+        bulkRate: 60.00
+        bulkUnit: per 100 credits
+costAllocation:
+  dimensions:
+    - team
+    - plan tier
+    - calendar month
+  tags:
+    - team-id
+    - billing-period
+budgeting:
+  controls:
+    - name: Monthly Spending Cap
+      description: >-
+        Team admins can set a maximum monthly spend limit for usage-based
+        charges. Once reached, additional API calls and AI credit overages
+        are blocked until the next calendar month.
+      configurableBy: team admin
+      granularity: team
+    - name: 80% Threshold Alert
+      description: >-
+        Automated email alert sent to team admins when the monthly spending
+        cap is 80% consumed, enabling proactive cost management before
+        services are blocked.
+      alertRecipients: team admins
+      threshold: 80%
+      channel: email
+optimization:
+  recommendations:
+    - name: Prefer /render/elements for structured diagrams
+      description: >-
+        Use the DSL-based /render/elements endpoint ($0.20/call) instead of
+        the AI prompt endpoint ($0.80/call) when diagram structure is known
+        in advance, reducing per-call cost by 75%.
+    - name: Use Business plan for high-volume teams
+      description: >-
+        Teams consuming more than 40 AI credits/month should evaluate the
+        Business plan (250 credits) to reduce overage costs before usage-based
+        billing kicks in.
+    - name: Set conservative spending caps
+      description: >-
+        Enable spending caps on all paid teams and set initial limits
+        conservatively, adjusting upward as usage patterns are understood.
+    - name: Monitor usage metrics via API
+      description: >-
+        Use the GET /api/team/usage endpoint to retrieve aggregated team usage
+        metrics programmatically for integration with internal cost dashboards.
+billing:
+  cycle: monthly (calendar month)
+  invoicing: next-month invoice
+  paymentMethods:
+    - credit card
+    - ACH/wire transfer (Enterprise only)
+  discounts:
+    - Education users
+    - Non-profit organizations
+  resetDate: 1st of each calendar month

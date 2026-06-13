@@ -1,0 +1,80 @@
+name: Eraser API Rate Limits
+description: >-
+  Eraser enforces usage-based limits on API calls. On paid plans with
+  usage-based billing enabled, API calls are billed per request beyond
+  the plan's included credits. When a team reaches its configured monthly
+  spending cap (80% triggers an admin alert), additional API calls are blocked
+  until the next calendar month. A 503 HTTP response indicates the service is
+  temporarily unavailable due to excessive request volume.
+url: https://docs.eraser.io/docs/usage-based-pricing
+specificationVersion: '0.1'
+rateLimits:
+  - name: Render Prompt API Monthly Spending Cap
+    description: >-
+      API calls to the /render/prompt endpoint (AI diagram generation from
+      natural language) are billed at $80 per 100 calls ($0.80 per call).
+      When a team's monthly spending cap is reached, additional calls are
+      blocked until the next calendar month resets the counter.
+    endpoint: POST /api/render/prompt
+    scope: team
+    billingRate: 0.80
+    billingUnit: per call
+    currency: USD
+    resetPeriod: monthly (calendar month)
+    blockBehavior: >-
+      Additional calls blocked after spending cap is reached; resumes at
+      the start of the next calendar month
+    alertThreshold: 80% of monthly spending cap triggers admin email alert
+    errorResponse:
+      status: 503
+      message: Service temporarily unavailable. This may be the result of too many requests.
+  - name: Render Elements API Monthly Spending Cap
+    description: >-
+      API calls to the /render/elements endpoint (DSL-to-diagram conversion)
+      are billed at $20 per 100 calls ($0.20 per call). Subject to the same
+      monthly spending cap and blocking behavior as other API endpoints.
+    endpoint: POST /api/render/elements
+    scope: team
+    billingRate: 0.20
+    billingUnit: per call
+    currency: USD
+    resetPeriod: monthly (calendar month)
+    blockBehavior: >-
+      Additional calls blocked after spending cap is reached; resumes at
+      the start of the next calendar month
+    alertThreshold: 80% of monthly spending cap triggers admin email alert
+    errorResponse:
+      status: 503
+      message: Service temporarily unavailable. This may be the result of too many requests.
+  - name: AI Credits Monthly Allowance
+    description: >-
+      Monthly AI credits are included per plan (40 on Starter, 250 on Business,
+      unlimited on Enterprise). Usage beyond the plan allowance requires
+      usage-based billing at $60 per 100 credits ($0.60 per credit).
+      Free plan users receive 5 AI credits per month with no overage option.
+    scope: team
+    planAllowances:
+      - plan: Free
+        creditsPerMonth: 5
+        overageAllowed: false
+      - plan: Starter
+        creditsPerMonth: 40
+        overageAllowed: true
+        overageRate: 0.60
+        overageUnit: per credit
+        currency: USD
+      - plan: Business
+        creditsPerMonth: 250
+        overageAllowed: true
+        overageRate: 0.60
+        overageUnit: per credit
+        currency: USD
+      - plan: Enterprise
+        creditsPerMonth: unlimited
+        overageAllowed: false
+    resetPeriod: monthly (calendar month)
+accessRequirements:
+  - API access requires a paid plan (Starter, Business, or Enterprise)
+  - Usage-based billing must be enabled by a team admin
+  - API tokens are provisioned per team from the Settings page
+  - Free plan does not support API access

@@ -1,0 +1,112 @@
+name: Eraser Plans and Pricing
+description: >-
+  Eraser offers four subscription tiers — Free, Starter, Business, and
+  Enterprise — differentiated primarily by file creation limits, monthly AI
+  diagram credits, version history retention, SSO support, and API access.
+  API calls require paid plans with usage-based billing enabled and are
+  charged separately from monthly AI credits.
+url: https://www.eraser.io/pricing
+specificationVersion: '0.1'
+plans:
+  - name: Free
+    description: >-
+      Entry-level plan for individuals exploring Eraser. Includes access to
+      core diagramming features with limited file creation and AI credits.
+      API access is not available on the Free plan.
+    url: https://www.eraser.io/pricing
+    price: 0.00
+    currency: USD
+    billingCycle: monthly
+    unit: member
+    features:
+      - 3 files maximum
+      - 5 AI diagram credits per month
+      - 7-day version history
+      - Unlimited team members
+      - Unlimited guests
+      - Core diagramming features
+      - No API access
+  - name: Starter
+    description: >-
+      Designed for individuals and small teams needing unlimited files and
+      expanded AI credits. API access is available with usage-based billing
+      enabled. Billed annually at $15/member/month or $20/month billed monthly.
+    url: https://www.eraser.io/pricing
+    price: 15.00
+    currency: USD
+    billingCycle: monthly
+    unit: member/month (annual billing)
+    features:
+      - Unlimited files
+      - 40 AI diagram credits per month
+      - 90-day version history
+      - Private files
+      - 20 custom icons
+      - API access (usage-based billing required)
+      - AI diagram generation API
+    additionalCosts:
+      - description: API calls (/render/prompt endpoint)
+        price: 0.80
+        unit: per call
+        currency: USD
+      - description: API calls (/render/elements endpoint)
+        price: 0.20
+        unit: per call
+        currency: USD
+      - description: Additional AI credits beyond plan allowance
+        price: 0.60
+        unit: per credit
+        currency: USD
+  - name: Business
+    description: >-
+      For teams at companies requiring advanced security and compliance features
+      such as SAML SSO, along with higher AI credit allowances. Billed annually
+      at $45/member/month or $60/month billed monthly.
+    url: https://www.eraser.io/pricing
+    price: 45.00
+    currency: USD
+    billingCycle: monthly
+    unit: member/month (annual billing)
+    features:
+      - Everything in Starter
+      - 250 AI diagram credits per month
+      - Unlimited version history
+      - SAML SSO support
+      - 100 custom icons
+      - API access (usage-based billing required)
+      - Priority support
+    additionalCosts:
+      - description: API calls (/render/prompt endpoint)
+        price: 0.80
+        unit: per call
+        currency: USD
+      - description: API calls (/render/elements endpoint)
+        price: 0.20
+        unit: per call
+        currency: USD
+      - description: Additional AI credits beyond plan allowance
+        price: 0.60
+        unit: per credit
+        currency: USD
+  - name: Enterprise
+    description: >-
+      Custom plan for large organizations requiring unlimited AI generation,
+      flexible deployment options (single-tenancy, private cloud), dedicated
+      customer success management, and custom invoicing including ACH/wire
+      transfer. Pricing is negotiated directly with Eraser sales.
+    url: https://www.eraser.io/enterprise
+    price: 0.00
+    currency: USD
+    billingCycle: custom
+    unit: custom
+    features:
+      - Unlimited AI diagram generation
+      - Unlimited API calls
+      - Flexible deployment (single-tenancy, private cloud)
+      - Dedicated customer success manager
+      - Custom invoicing and ACH/wire transfer
+      - SAML SSO
+      - Unlimited version history
+      - Unlimited custom icons
+      - SLA guarantees
+      - Volume discounts

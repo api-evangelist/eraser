@@ -1,0 +1,86 @@
+aid: eraser
+name: Eraser
+description: >-
+  Eraser is an AI-powered diagramming and technical documentation platform
+  designed for engineering teams. It provides a REST API for generating diagrams
+  from natural language prompts or structured DSL, managing files and workspaces,
+  and embedding interactive technical visuals into documentation workflows.
+  The platform supports a wide range of diagram types including flow charts, ERDs,
+  sequence diagrams, cloud architecture diagrams, and BPMN diagrams. Eraser
+  integrates with tools such as GitHub, VS Code, Notion, and Confluence, and
+  provides an MCP server for AI agent-driven diagram automation.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/eraser/refs/heads/main/apis.yml
+created: '2026-06-13'
+modified: '2026-06-13'
+specificationVersion: '0.19'
+tags:
+  - Diagrams
+  - Documentation
+  - AI
+  - Technical Documentation
+  - Diagramming
+  - Architecture
+  - Developer Tools
+apis:
+  - aid: eraser:eraser-api
+    name: Eraser API
+    description: >-
+      The Eraser REST API provides programmatic access to diagram generation,
+      file management, folder management, audit logs, and team usage metrics.
+      Developers can generate diagrams from natural language prompts or Eraser
+      DSL, create and manage files and diagrams on the canvas, and retrieve
+      aggregated usage metrics. API access requires a team API token and is
+      available on Starter, Business, and Enterprise paid plans with
+      usage-based billing for API calls beyond plan credits.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://docs.eraser.io/docs/eraser-api
+    baseURL: https://app.eraser.io
+    tags:
+      - Diagrams
+      - Files
+      - Workspaces
+      - AI
+      - Documentation
+    properties:
+      - type: Documentation
+        url: https://docs.eraser.io/docs/eraser-api
+      - type: OpenAPI
+        url: https://app.eraser.io/.well-known/api-spec.json
+      - type: APIReference
+        url: https://docs.eraser.io/reference
+      - type: Quickstart
+        url: https://docs.eraser.io/docs/quickstart
+      - type: LLMsIndex
+        url: https://docs.eraser.io/llms.txt
+    contact:
+      - FN: Eraser Support
+        url: https://www.eraser.io/
+        email: hello@eraser.io
+common:
+  - type: Website
+    url: https://www.eraser.io/
+  - type: Documentation
+    url: https://docs.eraser.io/
+  - type: APIReference
+    url: https://docs.eraser.io/reference
+  - type: GitHubOrg
+    url: https://github.com/eraserlabs
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/eraser
+  - type: Blog
+    url: https://www.eraser.io/decision-node
+  - type: Pricing
+    url: https://www.eraser.io/pricing
+  - type: X
+    url: https://x.com/eraserlabs
+  - type: Plans
+    url: plans/eraser-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/eraser-rate-limits.yml
+  - type: FinOps
+    url: finops/eraser-finops.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
