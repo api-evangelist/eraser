@@ -9,5 +9,14 @@
       "lastChecked": "2026-06-13",
       "notes": "No RSS/Atom feed found at standard paths (/feed, /feed.xml, /rss.xml, /decision-node/rss.xml, /blog/rss.xml). Blog is rendered as a standard web page without a discoverable syndication feed."
     }
-  ]
+  ],
+  "repo": "eraser",
+  "feeds": [
+    {
+      "source": "https://www.linkedin.com/company/eraser",
+      "error": "HTTPError"
+    }
+  ],
+  "post_count": 0,
+  "fetched": "2026-06-14T20:42:17Z"
 }
