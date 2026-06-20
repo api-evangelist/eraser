@@ -10,7 +10,7 @@ description: >-
   integrates with tools such as GitHub, VS Code, Notion, and Confluence, and
   provides an MCP server for AI agent-driven diagram automation.
 type: Index
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 url: https://raw.githubusercontent.com/api-evangelist/eraser/refs/heads/main/apis.yml
 created: '2026-06-13'
 modified: '2026-06-13'
@@ -34,7 +34,7 @@ apis:
       aggregated usage metrics. API access requires a team API token and is
       available on Starter, Business, and Enterprise paid plans with
       usage-based billing for API calls beyond plan credits.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://docs.eraser.io/docs/eraser-api
     baseURL: https://app.eraser.io
     tags:
