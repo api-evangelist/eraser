@@ -52,7 +52,7 @@ apis:
         url: openapi/eraser-eraser-api-openapi.yml
       - type: APIReference
         url: https://docs.eraser.io/reference
-      - type: Quickstart
+      - type: GettingStarted
         url: https://docs.eraser.io/docs/quickstart
       - type: LLMsIndex
         url: https://docs.eraser.io/llms.txt
