@@ -1,0 +1,23 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/eraser-eraser-api-openapi.yml
+summary:
+  types:
+  - apiKey
+  - http
+  api_key_in:
+  - header
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  description: Team-specific API bearer token from Eraser settings
+  sources:
+  - openapi/eraser-eraser-api-openapi.yml
+- name: auditApiKey
+  type: apiKey
+  in: header
+  parameter: Authorization
+  description: Audit-specific API key for accessing audit log endpoints
+  sources:
+  - openapi/eraser-eraser-api-openapi.yml

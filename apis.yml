@@ -61,6 +61,10 @@ apis:
         url: https://www.eraser.io/
         email: hello@eraser.io
 common:
+  - type: DomainSecurity
+    url: security/eraser-domain-security.yml
+  - type: Authentication
+    url: authentication/eraser-authentication.yml
   - type: Website
     url: https://www.eraser.io/
   - type: Documentation
