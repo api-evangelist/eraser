@@ -1,0 +1,402 @@
+openapi: 3.0.3
+info:
+  title: Eraser AI Requests Diagram Elements API
+  description: The Eraser REST API provides programmatic access to diagram generation, file management, folder management, audit logs, and team usage metrics. Developers can generate diagrams from natural language prompts or Eraser DSL, create and manage files and diagrams on the canvas, and retrieve aggregated usage metrics. API access requires a team API token and is available on Starter, Business, and Enterprise paid plans with usage-based billing for API calls beyond plan credits.
+  version: v1.0
+  contact:
+    name: Eraser Support
+    url: https://www.eraser.io/
+    email: hello@eraser.io
+  termsOfService: https://www.eraser.io/
+servers:
+- url: https://app.eraser.io
+  description: Eraser API Server
+security:
+- bearerAuth: []
+tags:
+- name: Diagram Elements
+  description: Manage diagram elements within files
+paths:
+  /api/files/{fileId}/diagrams:
+    post:
+      operationId: createDiagram
+      summary: Create a diagram in a file
+      description: Creates a new diagram element within an existing file.
+      tags:
+      - Diagram Elements
+      externalDocs:
+        description: API documentation
+        url: https://docs.eraser.io/reference/create-diagram
+      parameters:
+      - name: fileId
+        in: path
+        required: true
+        description: ID of the file to add the diagram to
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateDiagramRequest'
+      responses:
+        '200':
+          description: Diagram created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Diagram'
+        '400':
+          description: Invalid file ID or missing diagramType
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Missing or invalid bearer token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: File not found, private, archived, template, or belongs to different team
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    get:
+      operationId: listDiagrams
+      summary: List diagrams in a file
+      description: Returns all diagram elements within a specific file.
+      tags:
+      - Diagram Elements
+      externalDocs:
+        description: API documentation
+        url: https://docs.eraser.io/reference/list-diagrams
+      parameters:
+      - name: fileId
+        in: path
+        required: true
+        description: ID of the file containing the diagrams
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Diagrams retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Diagram'
+        '400':
+          description: Invalid file ID
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Missing or invalid bearer token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: File not found, private, archived, template, or belongs to different team
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /api/files/{fileId}/diagrams/{diagramId}:
+    get:
+      operationId: getDiagram
+      summary: Get a diagram
+      description: Retrieves a specific diagram element from a file by its ID.
+      tags:
+      - Diagram Elements
+      externalDocs:
+        description: API documentation
+        url: https://docs.eraser.io/reference/get-diagram
+      parameters:
+      - name: fileId
+        in: path
+        required: true
+        description: ID of the file containing the diagram
+        schema:
+          type: string
+      - name: diagramId
+        in: path
+        required: true
+        description: ID of the diagram to retrieve
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Diagram retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Diagram'
+        '400':
+          description: Invalid file ID or diagram ID
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Missing or invalid bearer token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: File or diagram not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      operationId: updateDiagram
+      summary: Update a diagram
+      description: Updates the DSL code of an existing diagram element within a file.
+      tags:
+      - Diagram Elements
+      externalDocs:
+        description: API documentation
+        url: https://docs.eraser.io/reference/update-diagram
+      parameters:
+      - name: fileId
+        in: path
+        required: true
+        description: ID of the file containing the diagram
+        schema:
+          type: string
+      - name: diagramId
+        in: path
+        required: true
+        description: ID of the diagram to update
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateDiagramRequest'
+      responses:
+        '200':
+          description: Diagram updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Diagram'
+        '400':
+          description: Invalid file/diagram ID or missing code field
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Missing or invalid bearer token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Unauthorized access
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: File or diagram not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      operationId: deleteDiagram
+      summary: Delete a diagram
+      description: Permanently deletes a diagram element from a file.
+      tags:
+      - Diagram Elements
+      externalDocs:
+        description: API documentation
+        url: https://docs.eraser.io/reference/delete-diagram
+      parameters:
+      - name: fileId
+        in: path
+        required: true
+        description: ID of the file containing the diagram
+        schema:
+          type: string
+      - name: diagramId
+        in: path
+        required: true
+        description: ID of the diagram to delete
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Diagram deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteDiagramResponse'
+        '400':
+          description: Invalid file ID or diagram ID
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Missing or invalid bearer token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Unauthorized access
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: File or diagram not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    Diagram:
+      type: object
+      required:
+      - id
+      - diagramUrl
+      - diagramType
+      - code
+      - updatedAt
+      properties:
+        id:
+          type: string
+          description: Unique diagram identifier
+        diagramUrl:
+          type: string
+          description: Canvas URL for viewing the diagram
+        diagramType:
+          $ref: '#/components/schemas/DiagramType'
+        code:
+          type: string
+          description: Eraser DSL code for the diagram
+        updatedAt:
+          type: string
+          format: date-time
+          description: ISO 8601 last modification timestamp
+    UpdateDiagramRequest:
+      type: object
+      required:
+      - code
+      properties:
+        code:
+          type: string
+          description: New Eraser DSL code for the diagram
+    DeleteDiagramResponse:
+      type: object
+      required:
+      - deleted
+      - fileUrl
+      properties:
+        deleted:
+          type: boolean
+          description: Whether the diagram was successfully deleted
+        fileUrl:
+          type: string
+          description: URL of the containing file
+    DiagramType:
+      type: string
+      enum:
+      - sequence-diagram
+      - entity-relationship-diagram
+      - cloud-architecture-diagram
+      - flowchart-diagram
+      - bpmn-diagram
+      description: Type of Eraser diagram
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message describing what went wrong
+    CreateDiagramRequest:
+      type: object
+      required:
+      - diagramType
+      properties:
+        diagramType:
+          $ref: '#/components/schemas/DiagramType'
+        code:
+          type: string
+          description: Eraser DSL code for the diagram. If omitted, creates an empty diagram.
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Team-specific API bearer token from Eraser settings
+    auditApiKey:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Audit-specific API key for accessing audit log endpoints
+externalDocs:
+  description: Eraser API Documentation
+  url: https://docs.eraser.io/docs/eraser-api

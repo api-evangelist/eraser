@@ -1,0 +1,223 @@
+openapi: 3.0.3
+info:
+  title: Eraser AI Requests Audit Logs API
+  description: The Eraser REST API provides programmatic access to diagram generation, file management, folder management, audit logs, and team usage metrics. Developers can generate diagrams from natural language prompts or Eraser DSL, create and manage files and diagrams on the canvas, and retrieve aggregated usage metrics. API access requires a team API token and is available on Starter, Business, and Enterprise paid plans with usage-based billing for API calls beyond plan credits.
+  version: v1.0
+  contact:
+    name: Eraser Support
+    url: https://www.eraser.io/
+    email: hello@eraser.io
+  termsOfService: https://www.eraser.io/
+servers:
+- url: https://app.eraser.io
+  description: Eraser API Server
+security:
+- bearerAuth: []
+tags:
+- name: Audit Logs
+  description: Query audit events for compliance and monitoring
+paths:
+  /api/audit-logs:
+    get:
+      operationId: getAuditLogs
+      summary: Query audit logs
+      description: Query audit events with cursor-based pagination. Requires an audit API key (not the team bearer token). Supports filtering by time range, event type, and user.
+      tags:
+      - Audit Logs
+      externalDocs:
+        description: API documentation
+        url: https://docs.eraser.io/reference/get-audit-logs
+      security:
+      - auditApiKey: []
+      parameters:
+      - name: startTime
+        in: query
+        required: false
+        description: Start of the time range (inclusive). RFC3339/ISO 8601 timestamp.
+        schema:
+          type: string
+          format: date-time
+      - name: endTime
+        in: query
+        required: false
+        description: End of the time range (exclusive). RFC3339/ISO 8601 timestamp.
+        schema:
+          type: string
+          format: date-time
+      - name: cursor
+        in: query
+        required: false
+        description: Opaque cursor string for pagination.
+        schema:
+          type: string
+      - name: limit
+        in: query
+        required: false
+        description: Maximum events per request (1-1000). Defaults to 100.
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+      - name: eventType
+        in: query
+        required: false
+        description: Filter by action type.
+        schema:
+          type: string
+          enum:
+          - auth.login
+          - auth.logout
+          - iam.user.created
+          - iam.user.deleted
+          - iam.user.invited
+          - iam.role.granted
+          - iam.role.revoked
+          - admin.api_key.created
+          - admin.api_key.deleted
+          - admin.settings.changed
+          - admin.integration.connected
+          - admin.integration.disconnected
+          - admin.team.created
+          - admin.team.deleted
+          - data.file.created
+          - data.file.archived
+          - data.file.deleted
+          - data.file.exported
+          - data.file.invite_sent
+          - data.file.visited
+          - data.file.settings.changed
+      - name: userId
+        in: query
+        required: false
+        description: Filter events by the ID of the user who performed the action.
+        schema:
+          type: string
+      - name: format
+        in: query
+        required: false
+        description: Output format. Defaults to ecs.
+        schema:
+          type: string
+          enum:
+          - ecs
+          - splunk
+          default: ecs
+      responses:
+        '200':
+          description: Audit events retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuditLogResponse'
+        '400':
+          description: Invalid request parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Invalid or missing audit API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '503':
+          description: Audit logging not configured for deployment
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    AuditLogResponse:
+      type: object
+      required:
+      - events
+      - hasMore
+      - serverTime
+      properties:
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/AuditEventECS'
+        nextCursor:
+          type: string
+          nullable: true
+          description: Cursor for pagination
+        hasMore:
+          type: boolean
+          description: Whether more events are available
+        serverTime:
+          type: string
+          format: date-time
+          description: Current server time
+    AuditEventECS:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique event identifier
+        '@timestamp':
+          type: string
+          format: date-time
+          description: Event timestamp
+        event:
+          type: object
+          properties:
+            id:
+              type: string
+            category:
+              type: string
+            action:
+              type: string
+            outcome:
+              type: string
+        user:
+          type: object
+          description: User who performed the action
+        user.target:
+          type: object
+          description: Target user of the action (if applicable)
+        organization:
+          type: object
+          description: Organization context
+        url:
+          type: object
+          description: URL context of the event
+        eraser:
+          type: object
+          properties:
+            teamId:
+              type: string
+            workspaceId:
+              type: string
+            organizationId:
+              type: string
+            metadata:
+              type: object
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message describing what went wrong
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Team-specific API bearer token from Eraser settings
+    auditApiKey:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Audit-specific API key for accessing audit log endpoints
+externalDocs:
+  description: Eraser API Documentation
+  url: https://docs.eraser.io/docs/eraser-api

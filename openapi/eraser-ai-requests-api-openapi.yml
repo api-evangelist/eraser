@@ -1,0 +1,183 @@
+openapi: 3.0.3
+info:
+  title: Eraser AI Requests API
+  description: The Eraser REST API provides programmatic access to diagram generation, file management, folder management, audit logs, and team usage metrics. Developers can generate diagrams from natural language prompts or Eraser DSL, create and manage files and diagrams on the canvas, and retrieve aggregated usage metrics. API access requires a team API token and is available on Starter, Business, and Enterprise paid plans with usage-based billing for API calls beyond plan credits.
+  version: v1.0
+  contact:
+    name: Eraser Support
+    url: https://www.eraser.io/
+    email: hello@eraser.io
+  termsOfService: https://www.eraser.io/
+servers:
+- url: https://app.eraser.io
+  description: Eraser API Server
+security:
+- bearerAuth: []
+tags:
+- name: AI Requests
+  description: Retrieve previously generated AI diagram requests
+paths:
+  /api/ai-requests/{requestId}:
+    get:
+      operationId: retrieveAiRequest
+      summary: Retrieve a previous AI diagram request
+      description: Retrieves the inputs and outputs of a previously generated AI diagram request by its request ID. Optionally returns the PNG image directly as a file stream.
+      tags:
+      - AI Requests
+      externalDocs:
+        description: API documentation
+        url: https://docs.eraser.io/reference/retrieve-ai-request
+      parameters:
+      - name: requestId
+        in: path
+        required: true
+        description: ID of the AI request to retrieve (from /api/render/prompt response)
+        schema:
+          type: string
+      - name: returnFile
+        in: query
+        required: false
+        description: When true, returns the PNG image file directly instead of JSON
+        schema:
+          type: string
+          enum:
+          - 'true'
+          - 'false'
+      responses:
+        '200':
+          description: AI request retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AiRequest'
+            image/png:
+              schema:
+                type: string
+                format: binary
+                description: PNG image file (when returnFile=true)
+        '400':
+          description: Missing required parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Insufficient permissions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: AI request not found or PNG unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    AiRequestInput:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - text
+          - attachment
+          - context
+          - repository
+        text:
+          type: string
+          description: Text input (when type is 'text')
+        storageId:
+          type: string
+          description: Storage ID for attachment (when type is 'attachment')
+        filename:
+          type: string
+          description: Filename for attachment (when type is 'attachment')
+        mimeType:
+          type: string
+          description: MIME type for attachment (when type is 'attachment')
+        contextId:
+          type: string
+          description: Context ID (when type is 'context')
+        repository:
+          type: string
+          description: Repository name (when type is 'repository')
+        organization:
+          type: string
+          description: Organization name (when type is 'repository')
+        provider:
+          type: string
+          description: Git provider (when type is 'repository')
+    AiRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique AI request identifier
+        inputs:
+          type: array
+          items:
+            $ref: '#/components/schemas/AiRequestInput'
+        outputs:
+          type: array
+          items:
+            $ref: '#/components/schemas/AiRequestOutput'
+        mode:
+          type: string
+          enum:
+          - standard
+          - premium
+          description: AI model tier used
+    AiRequestOutput:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - diagram
+        diagramType:
+          $ref: '#/components/schemas/DiagramType'
+        code:
+          type: string
+          description: Eraser DSL code
+        diagramTitle:
+          type: string
+          description: Title of the generated diagram
+        imageUrl:
+          type: string
+          description: URL of the rendered PNG image
+    DiagramType:
+      type: string
+      enum:
+      - sequence-diagram
+      - entity-relationship-diagram
+      - cloud-architecture-diagram
+      - flowchart-diagram
+      - bpmn-diagram
+      description: Type of Eraser diagram
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message describing what went wrong
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Team-specific API bearer token from Eraser settings
+    auditApiKey:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Audit-specific API key for accessing audit log endpoints
+externalDocs:
+  description: Eraser API Documentation
+  url: https://docs.eraser.io/docs/eraser-api

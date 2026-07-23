@@ -1,0 +1,399 @@
+openapi: 3.0.3
+info:
+  title: Eraser AI Requests Folders API
+  description: The Eraser REST API provides programmatic access to diagram generation, file management, folder management, audit logs, and team usage metrics. Developers can generate diagrams from natural language prompts or Eraser DSL, create and manage files and diagrams on the canvas, and retrieve aggregated usage metrics. API access requires a team API token and is available on Starter, Business, and Enterprise paid plans with usage-based billing for API calls beyond plan credits.
+  version: v1.0
+  contact:
+    name: Eraser Support
+    url: https://www.eraser.io/
+    email: hello@eraser.io
+  termsOfService: https://www.eraser.io/
+servers:
+- url: https://app.eraser.io
+  description: Eraser API Server
+security:
+- bearerAuth: []
+tags:
+- name: Folders
+  description: Create and manage folders for organizing files
+paths:
+  /api/folders:
+    post:
+      operationId: createFolder
+      summary: Create a folder
+      description: Creates a new folder for organizing Eraser files.
+      tags:
+      - Folders
+      externalDocs:
+        description: API documentation
+        url: https://docs.eraser.io/reference/create-folder
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateFolderRequest'
+      responses:
+        '200':
+          description: Folder created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateFolderResponse'
+        '400':
+          description: Invalid request body
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Missing or invalid bearer token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    get:
+      operationId: listFolders
+      summary: List folders
+      description: Returns folders for the authenticated team. Optionally filter by parent folder or include all descendants recursively.
+      tags:
+      - Folders
+      externalDocs:
+        description: API documentation
+        url: https://docs.eraser.io/reference/list-folders
+      parameters:
+      - name: parentFolderId
+        in: query
+        required: false
+        description: Parent folder to list children of. Defaults to null (root folders).
+        schema:
+          type: string
+      - name: recursive
+        in: query
+        required: false
+        description: Include all descendant folders. Defaults to false.
+        schema:
+          type: string
+          enum:
+          - 'true'
+          - 'false'
+      responses:
+        '200':
+          description: Folders retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Folder'
+        '400':
+          description: Invalid request parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Missing or invalid bearer token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /api/folders/{folderId}:
+    get:
+      operationId: getFolder
+      summary: Get a folder
+      description: Retrieves a specific folder by its ID.
+      tags:
+      - Folders
+      externalDocs:
+        description: API documentation
+        url: https://docs.eraser.io/reference/get-folder
+      parameters:
+      - name: folderId
+        in: path
+        required: true
+        description: Unique folder identifier
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Folder retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Folder'
+        '400':
+          description: Invalid folder ID
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Missing or invalid bearer token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Folder not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      operationId: updateFolder
+      summary: Update a folder
+      description: Updates the name or parent folder of an existing folder.
+      tags:
+      - Folders
+      externalDocs:
+        description: API documentation
+        url: https://docs.eraser.io/reference/update-folder
+      parameters:
+      - name: folderId
+        in: path
+        required: true
+        description: The folder identifier to update
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateFolderRequest'
+      responses:
+        '200':
+          description: Folder updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '400':
+          description: Invalid folder ID or request body
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Missing or invalid bearer token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Folder not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      operationId: deleteFolder
+      summary: Delete a folder
+      description: Deletes a folder. Optionally deletes all child folders and archives their files recursively.
+      tags:
+      - Folders
+      externalDocs:
+        description: API documentation
+        url: https://docs.eraser.io/reference/delete-folder
+      parameters:
+      - name: folderId
+        in: path
+        required: true
+        description: The folder identifier to delete
+        schema:
+          type: string
+      - name: recursive
+        in: query
+        required: false
+        description: Deletes all child folders and archives their workspaces. Defaults to false.
+        schema:
+          type: string
+          enum:
+          - 'true'
+          - 'false'
+      responses:
+        '200':
+          description: Folder deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '400':
+          description: Invalid folder ID
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Missing or invalid bearer token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Folder not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    Folder:
+      type: object
+      required:
+      - id
+      - name
+      - order
+      - teamId
+      - createdBy
+      - createdAt
+      - updatedAt
+      properties:
+        id:
+          type: string
+          description: Unique folder identifier
+        name:
+          type: string
+          description: Folder name
+        order:
+          type: integer
+          description: Sort order among sibling folders
+        teamId:
+          type: string
+          description: Team ID
+        createdBy:
+          type: string
+          description: Creator's user ID
+        createdAt:
+          type: string
+          format: date-time
+          description: ISO 8601 creation timestamp
+        updatedAt:
+          type: string
+          format: date-time
+          description: ISO 8601 last updated timestamp
+        parentFolderId:
+          type: string
+          nullable: true
+          description: Parent folder ID, or null if root-level
+    SuccessResponse:
+      type: object
+      required:
+      - success
+      properties:
+        success:
+          type: boolean
+          description: Whether the operation was successful
+    CreateFolderRequest:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: Folder name
+        parentFolderId:
+          type: string
+          nullable: true
+          description: Parent folder ID, or null for root-level
+        order:
+          type: integer
+          description: Sort order among siblings. Auto-assigned if omitted.
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message describing what went wrong
+    UpdateFolderRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: New folder name
+        parentFolderId:
+          type: string
+          nullable: true
+          description: New parent folder ID, or null for root
+    CreateFolderResponse:
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: string
+          description: ID of the created folder
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Team-specific API bearer token from Eraser settings
+    auditApiKey:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Audit-specific API key for accessing audit log endpoints
+externalDocs:
+  description: Eraser API Documentation
+  url: https://docs.eraser.io/docs/eraser-api

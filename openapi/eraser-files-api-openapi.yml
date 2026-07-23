@@ -1,0 +1,496 @@
+openapi: 3.0.3
+info:
+  title: Eraser AI Requests Files API
+  description: The Eraser REST API provides programmatic access to diagram generation, file management, folder management, audit logs, and team usage metrics. Developers can generate diagrams from natural language prompts or Eraser DSL, create and manage files and diagrams on the canvas, and retrieve aggregated usage metrics. API access requires a team API token and is available on Starter, Business, and Enterprise paid plans with usage-based billing for API calls beyond plan credits.
+  version: v1.0
+  contact:
+    name: Eraser Support
+    url: https://www.eraser.io/
+    email: hello@eraser.io
+  termsOfService: https://www.eraser.io/
+servers:
+- url: https://app.eraser.io
+  description: Eraser API Server
+security:
+- bearerAuth: []
+tags:
+- name: Files
+  description: Create and manage Eraser files
+paths:
+  /api/files:
+    post:
+      operationId: createFile
+      summary: Create a new file
+      description: Creates a new Eraser file with optional document content and canvas elements.
+      tags:
+      - Files
+      externalDocs:
+        description: API documentation
+        url: https://docs.eraser.io/reference/create-file
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateFileRequest'
+      responses:
+        '200':
+          description: File created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileWithContent'
+        '400':
+          description: Invalid request body
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Missing or invalid bearer token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    get:
+      operationId: listFiles
+      summary: List files
+      description: Returns a paginated list of files for the authenticated team, with optional filtering by folder, author, and sorting.
+      tags:
+      - Files
+      externalDocs:
+        description: API documentation
+        url: https://docs.eraser.io/reference/list-files
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        description: Maximum number of files to return (1-500). Defaults to 100.
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 500
+          default: 100
+      - name: cursor
+        in: query
+        required: false
+        description: Cursor for pagination. Use nextCursor from a previous response.
+        schema:
+          type: string
+      - name: folderId
+        in: query
+        required: false
+        description: Filter files by folder ID.
+        schema:
+          type: string
+      - name: sort
+        in: query
+        required: false
+        description: Sort field with optional - prefix for descending order. Defaults to -updatedAt.
+        schema:
+          type: string
+          enum:
+          - createdAt
+          - -createdAt
+          - updatedAt
+          - -updatedAt
+          default: -updatedAt
+      - name: author
+        in: query
+        required: false
+        description: Filter by author (user ID or email address).
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Files retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileList'
+        '400':
+          description: Invalid request parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Missing or invalid bearer token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /api/files/{fileId}:
+    get:
+      operationId: getFile
+      summary: Get a file
+      description: Retrieves a specific file by ID, including its content and canvas elements.
+      tags:
+      - Files
+      externalDocs:
+        description: API documentation
+        url: https://docs.eraser.io/reference/get-file
+      parameters:
+      - name: fileId
+        in: path
+        required: true
+        description: ID of the file to retrieve
+        schema:
+          type: string
+      responses:
+        '200':
+          description: File retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileWithContent'
+        '400':
+          description: Invalid file ID format
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Missing or invalid bearer token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Unauthorized access
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: File not found, private, archived, template, or belongs to different team
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      operationId: updateFile
+      summary: Update a file
+      description: Updates a file's title, folder location, or document content. Markdown diagram code blocks in the document are converted to embedded diagrams.
+      tags:
+      - Files
+      externalDocs:
+        description: API documentation
+        url: https://docs.eraser.io/reference/update-file
+      parameters:
+      - name: fileId
+        in: path
+        required: true
+        description: ID of the file to update
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateFileRequest'
+      responses:
+        '200':
+          description: File updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileWithContent'
+        '400':
+          description: Invalid file ID
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Missing or invalid bearer token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: File not found, private, archived, template, or belongs to different team
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      operationId: archiveFile
+      summary: Archive a file
+      description: Archives (soft-deletes) a file by ID. The file can be restored through the Eraser UI afterward.
+      tags:
+      - Files
+      externalDocs:
+        description: API documentation
+        url: https://docs.eraser.io/reference/archive-file
+      parameters:
+      - name: fileId
+        in: path
+        required: true
+        description: ID of the file to archive
+        schema:
+          type: string
+      responses:
+        '200':
+          description: File archived successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArchiveFileResponse'
+        '400':
+          description: Invalid file ID
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Missing or invalid bearer token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: File not found, private, archived, template, or belongs to different team
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    CanvasElement:
+      type: object
+      required:
+      - type
+      properties:
+        type:
+          type: string
+          description: Element category (e.g., diagram, rectangle, ellipse)
+        diagramType:
+          $ref: '#/components/schemas/DiagramType'
+        code:
+          type: string
+          description: Eraser DSL code for diagram rendering
+        x:
+          type: number
+          description: Horizontal canvas position
+        y:
+          type: number
+          description: Vertical canvas position
+        width:
+          type: number
+          description: Element width
+        height:
+          type: number
+          description: Element height
+    FileList:
+      type: object
+      required:
+      - files
+      properties:
+        files:
+          type: array
+          items:
+            $ref: '#/components/schemas/File'
+        nextCursor:
+          type: string
+          nullable: true
+          description: Cursor for retrieving the next page of results
+    FileWithContent:
+      allOf:
+      - $ref: '#/components/schemas/File'
+      - type: object
+        properties:
+          content:
+            $ref: '#/components/schemas/FileContent'
+    CreateFileRequest:
+      type: object
+      properties:
+        title:
+          type: string
+          description: Title of the file. Defaults to "Untitled".
+        folderId:
+          type: string
+          description: Identifier for the folder destination
+        document:
+          type: string
+          description: Markdown content for the file's document. Supports diagram code blocks.
+        linkAccess:
+          $ref: '#/components/schemas/LinkAccess'
+        elements:
+          type: array
+          items:
+            $ref: '#/components/schemas/CanvasElement'
+          description: Canvas elements (diagrams, shapes, etc.)
+    LinkAccess:
+      type: string
+      enum:
+      - no-link-access
+      - anyone-with-link-can-edit
+      - publicly-viewable
+      - publicly-editable
+      - sso-readable
+      - sso-editable
+      description: File link access permission level
+    FileContent:
+      type: object
+      properties:
+        elements:
+          type: array
+          items:
+            $ref: '#/components/schemas/CanvasElementWithId'
+          description: Canvas elements in the file
+        document:
+          type: string
+          description: Markdown content of the file's document
+    UpdateFileRequest:
+      type: object
+      properties:
+        title:
+          type: string
+          description: New title for the file
+        folderId:
+          type: string
+          description: ID of the folder to move the file to
+        document:
+          type: string
+          description: New markdown content. Supports diagram code blocks converted to embedded diagrams.
+    DiagramType:
+      type: string
+      enum:
+      - sequence-diagram
+      - entity-relationship-diagram
+      - cloud-architecture-diagram
+      - flowchart-diagram
+      - bpmn-diagram
+      description: Type of Eraser diagram
+    CanvasElementWithId:
+      allOf:
+      - $ref: '#/components/schemas/CanvasElement'
+      - type: object
+        properties:
+          id:
+            type: string
+            description: Unique element identifier
+    File:
+      type: object
+      required:
+      - id
+      - fileUrl
+      - title
+      - author
+      - createdAt
+      - updatedAt
+      - linkAccess
+      properties:
+        id:
+          type: string
+          description: Unique file identifier
+        fileUrl:
+          type: string
+          description: URL to view the file in Eraser
+        title:
+          type: string
+          description: File name
+        author:
+          type: string
+          description: Creator's user ID
+        folderId:
+          type: string
+          nullable: true
+          description: Parent folder ID, or null if at root
+        createdAt:
+          type: string
+          format: date-time
+          description: ISO 8601 creation timestamp
+        updatedAt:
+          type: string
+          format: date-time
+          description: ISO 8601 last modification timestamp
+        linkAccess:
+          $ref: '#/components/schemas/LinkAccess'
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message describing what went wrong
+    ArchiveFileResponse:
+      type: object
+      required:
+      - archived
+      - fileUrl
+      properties:
+        archived:
+          type: boolean
+          description: Whether the file was successfully archived
+        fileUrl:
+          type: string
+          description: URL of the archived file
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Team-specific API bearer token from Eraser settings
+    auditApiKey:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Audit-specific API key for accessing audit log endpoints
+externalDocs:
+  description: Eraser API Documentation
+  url: https://docs.eraser.io/docs/eraser-api
