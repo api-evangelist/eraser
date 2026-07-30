@@ -10,7 +10,20 @@ description: >-
   integrates with tools such as GitHub, VS Code, Notion, and Confluence, and
   provides an MCP server for AI agent-driven diagram automation.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/eraser.png
 url: https://raw.githubusercontent.com/api-evangelist/eraser/refs/heads/main/apis.yml
 created: '2026-06-13'
 modified: '2026-06-13'
@@ -24,42 +37,132 @@ tags:
   - Architecture
   - Developer Tools
 apis:
-  - aid: eraser:eraser-api
-    name: Eraser API
-    description: >-
-      The Eraser REST API provides programmatic access to diagram generation,
-      file management, folder management, audit logs, and team usage metrics.
-      Developers can generate diagrams from natural language prompts or Eraser
-      DSL, create and manage files and diagrams on the canvas, and retrieve
-      aggregated usage metrics. API access requires a team API token and is
-      available on Starter, Business, and Enterprise paid plans with
-      usage-based billing for API calls beyond plan credits.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://docs.eraser.io/docs/eraser-api
-    baseURL: https://app.eraser.io
-    tags:
-      - Diagrams
-      - Files
-      - Workspaces
-      - AI
-      - Documentation
-    properties:
-      - type: Documentation
-        url: https://docs.eraser.io/docs/eraser-api
-      - type: OpenAPI
-        url: https://app.eraser.io/.well-known/api-spec.json
-      - type: OpenAPI
-        url: openapi/eraser-eraser-api-openapi.yml
-      - type: APIReference
-        url: https://docs.eraser.io/reference
-      - type: GettingStarted
-        url: https://docs.eraser.io/docs/quickstart
-      - type: LLMsIndex
-        url: https://docs.eraser.io/llms.txt
-    contact:
-      - FN: Eraser Support
-        url: https://www.eraser.io/
-        email: hello@eraser.io
+- aid: eraser:eraser-ai-requests-api
+  name: Eraser AI Requests API
+  description: Retrieve previously generated AI diagram requests
+  humanURL: https://docs.eraser.io/docs/eraser-api
+  baseURL: https://app.eraser.io
+  tags:
+  - AI Requests
+  properties:
+  - type: OpenAPI
+    url: openapi/eraser-ai-requests-api-openapi.yml
+  - type: Documentation
+    url: https://docs.eraser.io/docs/eraser-api
+  - type: APIReference
+    url: https://docs.eraser.io/reference
+  - type: GettingStarted
+    url: https://docs.eraser.io/docs/quickstart
+  - type: LLMsIndex
+    url: https://docs.eraser.io/llms.txt
+- aid: eraser:eraser-audit-logs-api
+  name: Eraser Audit Logs API
+  description: Query audit events for compliance and monitoring
+  humanURL: https://docs.eraser.io/docs/eraser-api
+  baseURL: https://app.eraser.io
+  tags:
+  - Audit Logs
+  properties:
+  - type: OpenAPI
+    url: openapi/eraser-audit-logs-api-openapi.yml
+  - type: Documentation
+    url: https://docs.eraser.io/docs/eraser-api
+  - type: APIReference
+    url: https://docs.eraser.io/reference
+  - type: GettingStarted
+    url: https://docs.eraser.io/docs/quickstart
+  - type: LLMsIndex
+    url: https://docs.eraser.io/llms.txt
+- aid: eraser:eraser-diagram-elements-api
+  name: Eraser Diagram Elements API
+  description: Manage diagram elements within files
+  humanURL: https://docs.eraser.io/docs/eraser-api
+  baseURL: https://app.eraser.io
+  tags:
+  - Diagram Elements
+  properties:
+  - type: OpenAPI
+    url: openapi/eraser-diagram-elements-api-openapi.yml
+  - type: Documentation
+    url: https://docs.eraser.io/docs/eraser-api
+  - type: APIReference
+    url: https://docs.eraser.io/reference
+  - type: GettingStarted
+    url: https://docs.eraser.io/docs/quickstart
+  - type: LLMsIndex
+    url: https://docs.eraser.io/llms.txt
+- aid: eraser:eraser-diagrams-ai-api
+  name: Eraser Diagrams (AI) API
+  description: Generate diagrams from natural language prompts or Eraser DSL using AI
+  humanURL: https://docs.eraser.io/docs/eraser-api
+  baseURL: https://app.eraser.io
+  tags:
+  - Diagrams (AI)
+  properties:
+  - type: OpenAPI
+    url: openapi/eraser-diagrams-ai-api-openapi.yml
+  - type: Documentation
+    url: https://docs.eraser.io/docs/eraser-api
+  - type: APIReference
+    url: https://docs.eraser.io/reference
+  - type: GettingStarted
+    url: https://docs.eraser.io/docs/quickstart
+  - type: LLMsIndex
+    url: https://docs.eraser.io/llms.txt
+- aid: eraser:eraser-files-api
+  name: Eraser Files API
+  description: Create and manage Eraser files
+  humanURL: https://docs.eraser.io/docs/eraser-api
+  baseURL: https://app.eraser.io
+  tags:
+  - Files
+  properties:
+  - type: OpenAPI
+    url: openapi/eraser-files-api-openapi.yml
+  - type: Documentation
+    url: https://docs.eraser.io/docs/eraser-api
+  - type: APIReference
+    url: https://docs.eraser.io/reference
+  - type: GettingStarted
+    url: https://docs.eraser.io/docs/quickstart
+  - type: LLMsIndex
+    url: https://docs.eraser.io/llms.txt
+- aid: eraser:eraser-folders-api
+  name: Eraser Folders API
+  description: Create and manage folders for organizing files
+  humanURL: https://docs.eraser.io/docs/eraser-api
+  baseURL: https://app.eraser.io
+  tags:
+  - Folders
+  properties:
+  - type: OpenAPI
+    url: openapi/eraser-folders-api-openapi.yml
+  - type: Documentation
+    url: https://docs.eraser.io/docs/eraser-api
+  - type: APIReference
+    url: https://docs.eraser.io/reference
+  - type: GettingStarted
+    url: https://docs.eraser.io/docs/quickstart
+  - type: LLMsIndex
+    url: https://docs.eraser.io/llms.txt
+- aid: eraser:eraser-usage-metrics-api
+  name: Eraser Usage Metrics API
+  description: Retrieve team usage and activity metrics
+  humanURL: https://docs.eraser.io/docs/eraser-api
+  baseURL: https://app.eraser.io
+  tags:
+  - Usage Metrics
+  properties:
+  - type: OpenAPI
+    url: openapi/eraser-usage-metrics-api-openapi.yml
+  - type: Documentation
+    url: https://docs.eraser.io/docs/eraser-api
+  - type: APIReference
+    url: https://docs.eraser.io/reference
+  - type: GettingStarted
+    url: https://docs.eraser.io/docs/quickstart
+  - type: LLMsIndex
+    url: https://docs.eraser.io/llms.txt
 common:
   - type: AgenticAccess
     url: agentic-access/eraser-agentic-access.yml
