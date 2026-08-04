@@ -1,0 +1,26 @@
+{
+  "provider": "eraser",
+  "sources": [
+    "eraser-ai-requests-api-openapi.yml",
+    "eraser-audit-logs-api-openapi.yml",
+    "eraser-diagram-elements-api-openapi.yml",
+    "eraser-diagrams-ai-api-openapi.yml",
+    "eraser-files-api-openapi.yml",
+    "eraser-folders-api-openapi.yml",
+    "eraser-usage-metrics-api-openapi.yml"
+  ],
+  "outputs": [
+    "eraser-ai-requests-api-openapi.yml",
+    "eraser-audit-logs-api-openapi.yml",
+    "eraser-diagram-elements-api-openapi.yml",
+    "eraser-diagrams-ai-api-openapi.yml",
+    "eraser-files-api-openapi.yml",
+    "eraser-folders-api-openapi.yml",
+    "eraser-usage-metrics-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
