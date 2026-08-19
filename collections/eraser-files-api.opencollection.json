@@ -1,0 +1,143 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Eraser AI Requests Files API",
+    "version": "v1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Files",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List files",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.eraser.io/api/files",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of files to return (1-500). Defaults to 100."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for pagination. Use nextCursor from a previous response."
+              },
+              {
+                "name": "folderId",
+                "value": "",
+                "type": "query",
+                "description": "Filter files by folder ID."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sort field with optional - prefix for descending order. Defaults to -updatedAt."
+              },
+              {
+                "name": "author",
+                "value": "",
+                "type": "query",
+                "description": "Filter by author (user ID or email address)."
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of files for the authenticated team, with optional filtering by folder, author, and sorting."
+        },
+        {
+          "info": {
+            "name": "Create a new file",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.eraser.io/api/files",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new Eraser file with optional document content and canvas elements."
+        },
+        {
+          "info": {
+            "name": "Get a file",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.eraser.io/api/files/:fileId",
+            "params": [
+              {
+                "name": "fileId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the file to retrieve"
+              }
+            ]
+          },
+          "docs": "Retrieves a specific file by ID, including its content and canvas elements."
+        },
+        {
+          "info": {
+            "name": "Update a file",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://app.eraser.io/api/files/:fileId",
+            "params": [
+              {
+                "name": "fileId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the file to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a file's title, folder location, or document content. Markdown diagram code blocks in the document are converted to embedded diagrams."
+        },
+        {
+          "info": {
+            "name": "Archive a file",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://app.eraser.io/api/files/:fileId",
+            "params": [
+              {
+                "name": "fileId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the file to archive"
+              }
+            ]
+          },
+          "docs": "Archives (soft-deletes) a file by ID. The file can be restored through the Eraser UI afterward."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

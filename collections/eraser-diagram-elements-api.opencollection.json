@@ -1,0 +1,145 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Eraser AI Requests Diagram Elements API",
+    "version": "v1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Diagram Elements",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List diagrams in a file",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.eraser.io/api/files/:fileId/diagrams",
+            "params": [
+              {
+                "name": "fileId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the file containing the diagrams"
+              }
+            ]
+          },
+          "docs": "Returns all diagram elements within a specific file."
+        },
+        {
+          "info": {
+            "name": "Create a diagram in a file",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.eraser.io/api/files/:fileId/diagrams",
+            "params": [
+              {
+                "name": "fileId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the file to add the diagram to"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new diagram element within an existing file."
+        },
+        {
+          "info": {
+            "name": "Get a diagram",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.eraser.io/api/files/:fileId/diagrams/:diagramId",
+            "params": [
+              {
+                "name": "fileId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the file containing the diagram"
+              },
+              {
+                "name": "diagramId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the diagram to retrieve"
+              }
+            ]
+          },
+          "docs": "Retrieves a specific diagram element from a file by its ID."
+        },
+        {
+          "info": {
+            "name": "Update a diagram",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://app.eraser.io/api/files/:fileId/diagrams/:diagramId",
+            "params": [
+              {
+                "name": "fileId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the file containing the diagram"
+              },
+              {
+                "name": "diagramId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the diagram to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the DSL code of an existing diagram element within a file."
+        },
+        {
+          "info": {
+            "name": "Delete a diagram",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://app.eraser.io/api/files/:fileId/diagrams/:diagramId",
+            "params": [
+              {
+                "name": "fileId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the file containing the diagram"
+              },
+              {
+                "name": "diagramId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the diagram to delete"
+              }
+            ]
+          },
+          "docs": "Permanently deletes a diagram element from a file."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

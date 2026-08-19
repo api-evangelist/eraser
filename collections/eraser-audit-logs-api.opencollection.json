@@ -1,0 +1,85 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Eraser AI Requests Audit Logs API",
+    "version": "v1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Audit Logs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Query audit logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.eraser.io/api/audit-logs",
+            "params": [
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query",
+                "description": "Start of the time range (inclusive). RFC3339/ISO 8601 timestamp."
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query",
+                "description": "End of the time range (exclusive). RFC3339/ISO 8601 timestamp."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Opaque cursor string for pagination."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum events per request (1-1000). Defaults to 100."
+              },
+              {
+                "name": "eventType",
+                "value": "",
+                "type": "query",
+                "description": "Filter by action type."
+              },
+              {
+                "name": "userId",
+                "value": "",
+                "type": "query",
+                "description": "Filter events by the ID of the user who performed the action."
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Output format. Defaults to ecs."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Query audit events with cursor-based pagination. Requires an audit API key (not the team bearer token). Supports filtering by time range, event type, and user."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

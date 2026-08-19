@@ -1,0 +1,415 @@
+{
+  "item": [
+    {
+      "id": "0bdf11a9-827d-4e9c-8624-1b200ec00072",
+      "name": "Usage Metrics",
+      "description": {
+        "content": "Retrieve team usage and activity metrics",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0d6a4e8d-9ec3-4a05-9056-80a2d45e452b",
+          "name": "Get team usage metrics",
+          "request": {
+            "name": "Get team usage metrics",
+            "description": {
+              "content": "Retrieves aggregated usage metrics for the team, including active members, file counts, and AI credit usage over a configurable date range.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "reports",
+                "usage"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "rangeDays",
+                  "value": "30",
+                  "description": "Number of days to include in the report. Defaults to 30, min 1, max 365."
+                },
+                {
+                  "disabled": false,
+                  "key": "endDate",
+                  "value": "<date>",
+                  "description": "End date for the report range (YYYY-MM-DD format)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dd4999d7-8406-41a8-8835-007f8e13dac0",
+              "name": "Usage metrics retrieved successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "reports",
+                    "usage"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "rangeDays",
+                      "value": "30"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"range\": {\n    \"start\": \"1991-07-20\",\n    \"end\": \"1972-05-17\"\n  },\n  \"aggregate\": {\n    \"teamName\": \"string\",\n    \"totalMembers\": 3125,\n    \"activeMembers\": 5866,\n    \"inactiveMembers\": 8527,\n    \"totalFiles\": 5893,\n    \"totalFilesCreated\": 8635,\n    \"totalFilesViewed\": 4265,\n    \"totalFileViews\": 3710,\n    \"totalAiCreditsUsed\": 4781\n  },\n  \"members\": [\n    {\n      \"email\": \"string\",\n      \"displayName\": \"string\",\n      \"filesCreated\": 69,\n      \"filesViewed\": 1321,\n      \"fileViews\": 8843,\n      \"aiCreditsUsed\": 6790,\n      \"lastActive\": \"1976-09-26T12:53:14.464Z\"\n    },\n    {\n      \"email\": \"string\",\n      \"displayName\": \"string\",\n      \"filesCreated\": 4580,\n      \"filesViewed\": 1977,\n      \"fileViews\": 7249,\n      \"aiCreditsUsed\": 6685,\n      \"lastActive\": \"2017-02-16T17:17:08.278Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f692fe70-b2d3-4a9c-b90a-ff0cea42bd18",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "reports",
+                    "usage"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "rangeDays",
+                      "value": "30"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "71fdf057-33d8-4e6e-906e-23e4c7062233",
+              "name": "Missing or invalid bearer token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "reports",
+                    "usage"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "rangeDays",
+                      "value": "30"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "224ef65f-1915-4a94-8603-ef560f546455",
+              "name": "Unauthorized - token is valid but lacks permission",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "reports",
+                    "usage"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "rangeDays",
+                      "value": "30"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "33bc806a-04c9-4804-b75b-6aac1c121119",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "reports",
+                    "usage"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "rangeDays",
+                      "value": "30"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "483c588d-32bc-4020-b639-d36a5a5e7907",
+              "name": "Service temporarily unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "reports",
+                    "usage"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "rangeDays",
+                      "value": "30"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://app.eraser.io",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "cedd834f-02ed-450a-89d1-473aae2b975e",
+    "name": "Eraser AI Requests Usage Metrics API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Eraser REST API provides programmatic access to diagram generation, file management, folder management, audit logs, and team usage metrics. Developers can generate diagrams from natural language prompts or Eraser DSL, create and manage files and diagrams on the canvas, and retrieve aggregated usage metrics. API access requires a team API token and is available on Starter, Business, and Enterprise paid plans with usage-based billing for API calls beyond plan credits.\n\nContact Support:\n Name: Eraser Support\n Email: hello@eraser.io",
+      "type": "text/plain"
+    }
+  }
+}

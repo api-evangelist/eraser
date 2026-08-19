@@ -1,0 +1,49 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Eraser AI Requests API",
+    "version": "v1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "AI Requests",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a previous AI diagram request",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.eraser.io/api/ai-requests/:requestId",
+            "params": [
+              {
+                "name": "requestId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the AI request to retrieve (from /api/render/prompt response)"
+              },
+              {
+                "name": "returnFile",
+                "value": "",
+                "type": "query",
+                "description": "When true, returns the PNG image file directly instead of JSON"
+              }
+            ]
+          },
+          "docs": "Retrieves the inputs and outputs of a previously generated AI diagram request by its request ID. Optionally returns the PNG image directly as a file stream."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

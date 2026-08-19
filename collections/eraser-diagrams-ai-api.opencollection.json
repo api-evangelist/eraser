@@ -1,0 +1,54 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Eraser AI Requests Diagrams (AI) API",
+    "version": "v1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Diagrams (AI)",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Generate diagram from natural language prompt (AI)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.eraser.io/api/render/prompt",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generates a diagram from natural language or code input using AI. Supports a wide range of diagram types including flow charts, ERDs, sequence diagrams, cloud architecture diagrams, and BPMN diagrams."
+        },
+        {
+          "info": {
+            "name": "Generate diagram from Eraser DSL code",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.eraser.io/api/render/elements",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generates a diagram image from Eraser DSL canvas elements. Use this endpoint when you have structured DSL code and want to render it into a PNG image or create an editable Eraser file."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

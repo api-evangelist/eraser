@@ -1,0 +1,49 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Eraser AI Requests Usage Metrics API",
+    "version": "v1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Usage Metrics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get team usage metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.eraser.io/api/reports/usage",
+            "params": [
+              {
+                "name": "rangeDays",
+                "value": "",
+                "type": "query",
+                "description": "Number of days to include in the report. Defaults to 30, min 1, max 365."
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "End date for the report range (YYYY-MM-DD format)."
+              }
+            ]
+          },
+          "docs": "Retrieves aggregated usage metrics for the team, including active members, file counts, and AI credit usage over a configurable date range."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

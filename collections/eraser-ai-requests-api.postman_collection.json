@@ -1,0 +1,383 @@
+{
+  "item": [
+    {
+      "id": "ebe0555d-887c-4781-95ee-63e6ff610b19",
+      "name": "AI Requests",
+      "description": {
+        "content": "Retrieve previously generated AI diagram requests",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b811b8e8-c627-4ebe-8182-ff24e9b71705",
+          "name": "Retrieve a previous AI diagram request",
+          "request": {
+            "name": "Retrieve a previous AI diagram request",
+            "description": {
+              "content": "Retrieves the inputs and outputs of a previously generated AI diagram request by its request ID. Optionally returns the PNG image directly as a file stream.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "ai-requests",
+                ":requestId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "returnFile",
+                  "value": "<string>",
+                  "description": "When true, returns the PNG image file directly instead of JSON"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "requestId",
+                  "description": "(Required) ID of the AI request to retrieve (from /api/render/prompt response)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "861ef5f9-baa1-49be-ba5a-cac66b34994b",
+              "name": "AI request retrieved successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "ai-requests",
+                    ":requestId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnFile",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "requestId",
+                      "description": "(Required) ID of the AI request to retrieve (from /api/render/prompt response)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"inputs\": [\n    {\n      \"type\": \"repository\",\n      \"text\": \"string\",\n      \"storageId\": \"string\",\n      \"filename\": \"string\",\n      \"mimeType\": \"string\",\n      \"contextId\": \"string\",\n      \"repository\": \"string\",\n      \"organization\": \"string\",\n      \"provider\": \"string\"\n    },\n    {\n      \"type\": \"repository\",\n      \"text\": \"string\",\n      \"storageId\": \"string\",\n      \"filename\": \"string\",\n      \"mimeType\": \"string\",\n      \"contextId\": \"string\",\n      \"repository\": \"string\",\n      \"organization\": \"string\",\n      \"provider\": \"string\"\n    }\n  ],\n  \"outputs\": [\n    {\n      \"type\": \"diagram\",\n      \"diagramType\": \"cloud-architecture-diagram\",\n      \"code\": \"string\",\n      \"diagramTitle\": \"string\",\n      \"imageUrl\": \"string\"\n    },\n    {\n      \"type\": \"diagram\",\n      \"diagramType\": \"bpmn-diagram\",\n      \"code\": \"string\",\n      \"diagramTitle\": \"string\",\n      \"imageUrl\": \"string\"\n    }\n  ],\n  \"mode\": \"standard\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e5c8a395-affd-4047-8e8d-5a62f7f99c55",
+              "name": "Missing required parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "ai-requests",
+                    ":requestId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnFile",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "requestId",
+                      "description": "(Required) ID of the AI request to retrieve (from /api/render/prompt response)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0e2052bd-a523-41af-a6c5-823237168b64",
+              "name": "Insufficient permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "ai-requests",
+                    ":requestId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnFile",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "requestId",
+                      "description": "(Required) ID of the AI request to retrieve (from /api/render/prompt response)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b1858449-9a9b-4a89-9ad3-bbdb8aa8e1a9",
+              "name": "AI request not found or PNG unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "ai-requests",
+                    ":requestId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnFile",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "requestId",
+                      "description": "(Required) ID of the AI request to retrieve (from /api/render/prompt response)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "969f6df3-b009-4134-8548-4418e4f13c80",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "ai-requests",
+                    ":requestId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnFile",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "requestId",
+                      "description": "(Required) ID of the AI request to retrieve (from /api/render/prompt response)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://app.eraser.io",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "9c5f5ae4-ecba-49af-a698-bbececaedab6",
+    "name": "Eraser AI Requests API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Eraser REST API provides programmatic access to diagram generation, file management, folder management, audit logs, and team usage metrics. Developers can generate diagrams from natural language prompts or Eraser DSL, create and manage files and diagrams on the canvas, and retrieve aggregated usage metrics. API access requires a team API token and is available on Starter, Business, and Enterprise paid plans with usage-based billing for API calls beyond plan credits.\n\nContact Support:\n Name: Eraser Support\n Email: hello@eraser.io",
+      "type": "text/plain"
+    }
+  }
+}

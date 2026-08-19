@@ -1,0 +1,724 @@
+{
+  "item": [
+    {
+      "id": "518cd926-c938-48da-afc2-e740309c1e3a",
+      "name": "Diagrams (AI)",
+      "description": {
+        "content": "Generate diagrams from natural language prompts or Eraser DSL using AI",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f36f02fb-ca25-4f2b-9bf9-efb38fe33d9e",
+          "name": "Generate diagram from natural language prompt (AI)",
+          "request": {
+            "name": "Generate diagram from natural language prompt (AI)",
+            "description": {
+              "content": "Generates a diagram from natural language or code input using AI. Supports a wide range of diagram types including flow charts, ERDs, sequence diagrams, cloud architecture diagrams, and BPMN diagrams.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "render",
+                "prompt"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"text\": \"<string>\",\n  \"diagramType\": \"<string>\",\n  \"mode\": \"premium\",\n  \"priorRequestId\": \"<string>\",\n  \"attachments\": [\n    {\n      \"filename\": \"<string>\",\n      \"mimeType\": \"<string>\",\n      \"content\": \"<string>\"\n    },\n    {\n      \"filename\": \"<string>\",\n      \"mimeType\": \"<string>\",\n      \"content\": \"<string>\"\n    }\n  ],\n  \"contextId\": \"<string>\",\n  \"templateId\": \"<string>\",\n  \"inlineCodeEdit\": {\n    \"code\": \"<string>\",\n    \"diagramType\": \"<string>\"\n  },\n  \"gitContexts\": [\n    {\n      \"url\": \"<string>\",\n      \"repository\": \"<string>\",\n      \"organization\": \"<string>\"\n    },\n    {\n      \"url\": \"<string>\",\n      \"repository\": \"<string>\",\n      \"organization\": \"<string>\"\n    }\n  ],\n  \"returnImageAsFile\": \"<boolean>\",\n  \"fileOptions\": {\n    \"create\": \"<boolean>\",\n    \"linkAccess\": \"<string>\"\n  },\n  \"background\": \"<boolean>\",\n  \"theme\": \"light\",\n  \"imageQuality\": 2\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "596f13a1-d5dd-4bba-8e65-3c7887a0daec",
+              "name": "Diagram generated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "render",
+                    "prompt"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"<string>\",\n  \"diagramType\": \"<string>\",\n  \"mode\": \"premium\",\n  \"priorRequestId\": \"<string>\",\n  \"attachments\": [\n    {\n      \"filename\": \"<string>\",\n      \"mimeType\": \"<string>\",\n      \"content\": \"<string>\"\n    },\n    {\n      \"filename\": \"<string>\",\n      \"mimeType\": \"<string>\",\n      \"content\": \"<string>\"\n    }\n  ],\n  \"contextId\": \"<string>\",\n  \"templateId\": \"<string>\",\n  \"inlineCodeEdit\": {\n    \"code\": \"<string>\",\n    \"diagramType\": \"<string>\"\n  },\n  \"gitContexts\": [\n    {\n      \"url\": \"<string>\",\n      \"repository\": \"<string>\",\n      \"organization\": \"<string>\"\n    },\n    {\n      \"url\": \"<string>\",\n      \"repository\": \"<string>\",\n      \"organization\": \"<string>\"\n    }\n  ],\n  \"returnImageAsFile\": \"<boolean>\",\n  \"fileOptions\": {\n    \"create\": \"<boolean>\",\n    \"linkAccess\": \"<string>\"\n  },\n  \"background\": \"<boolean>\",\n  \"theme\": \"light\",\n  \"imageQuality\": 2\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"string\",\n  \"imageUrl\": \"string\",\n  \"createEraserFileUrl\": \"string\",\n  \"fileUrl\": \"string\",\n  \"diagrams\": [\n    {\n      \"diagramType\": \"<string>\",\n      \"code\": \"string\"\n    },\n    {\n      \"diagramType\": \"<string>\",\n      \"code\": \"string\"\n    }\n  ],\n  \"relevantFilePaths\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "21ea107e-f6e3-403f-94e4-533466fa5097",
+              "name": "Missing required parameters or validation failure",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "render",
+                    "prompt"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"<string>\",\n  \"diagramType\": \"<string>\",\n  \"mode\": \"premium\",\n  \"priorRequestId\": \"<string>\",\n  \"attachments\": [\n    {\n      \"filename\": \"<string>\",\n      \"mimeType\": \"<string>\",\n      \"content\": \"<string>\"\n    },\n    {\n      \"filename\": \"<string>\",\n      \"mimeType\": \"<string>\",\n      \"content\": \"<string>\"\n    }\n  ],\n  \"contextId\": \"<string>\",\n  \"templateId\": \"<string>\",\n  \"inlineCodeEdit\": {\n    \"code\": \"<string>\",\n    \"diagramType\": \"<string>\"\n  },\n  \"gitContexts\": [\n    {\n      \"url\": \"<string>\",\n      \"repository\": \"<string>\",\n      \"organization\": \"<string>\"\n    },\n    {\n      \"url\": \"<string>\",\n      \"repository\": \"<string>\",\n      \"organization\": \"<string>\"\n    }\n  ],\n  \"returnImageAsFile\": \"<boolean>\",\n  \"fileOptions\": {\n    \"create\": \"<boolean>\",\n    \"linkAccess\": \"<string>\"\n  },\n  \"background\": \"<boolean>\",\n  \"theme\": \"light\",\n  \"imageQuality\": 2\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ed913812-f558-4b86-af95-9e13858eae0a",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "render",
+                    "prompt"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"<string>\",\n  \"diagramType\": \"<string>\",\n  \"mode\": \"premium\",\n  \"priorRequestId\": \"<string>\",\n  \"attachments\": [\n    {\n      \"filename\": \"<string>\",\n      \"mimeType\": \"<string>\",\n      \"content\": \"<string>\"\n    },\n    {\n      \"filename\": \"<string>\",\n      \"mimeType\": \"<string>\",\n      \"content\": \"<string>\"\n    }\n  ],\n  \"contextId\": \"<string>\",\n  \"templateId\": \"<string>\",\n  \"inlineCodeEdit\": {\n    \"code\": \"<string>\",\n    \"diagramType\": \"<string>\"\n  },\n  \"gitContexts\": [\n    {\n      \"url\": \"<string>\",\n      \"repository\": \"<string>\",\n      \"organization\": \"<string>\"\n    },\n    {\n      \"url\": \"<string>\",\n      \"repository\": \"<string>\",\n      \"organization\": \"<string>\"\n    }\n  ],\n  \"returnImageAsFile\": \"<boolean>\",\n  \"fileOptions\": {\n    \"create\": \"<boolean>\",\n    \"linkAccess\": \"<string>\"\n  },\n  \"background\": \"<boolean>\",\n  \"theme\": \"light\",\n  \"imageQuality\": 2\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "349030ab-a048-436c-a3c4-dd333cb61605",
+              "name": "Prior request or context not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "render",
+                    "prompt"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"<string>\",\n  \"diagramType\": \"<string>\",\n  \"mode\": \"premium\",\n  \"priorRequestId\": \"<string>\",\n  \"attachments\": [\n    {\n      \"filename\": \"<string>\",\n      \"mimeType\": \"<string>\",\n      \"content\": \"<string>\"\n    },\n    {\n      \"filename\": \"<string>\",\n      \"mimeType\": \"<string>\",\n      \"content\": \"<string>\"\n    }\n  ],\n  \"contextId\": \"<string>\",\n  \"templateId\": \"<string>\",\n  \"inlineCodeEdit\": {\n    \"code\": \"<string>\",\n    \"diagramType\": \"<string>\"\n  },\n  \"gitContexts\": [\n    {\n      \"url\": \"<string>\",\n      \"repository\": \"<string>\",\n      \"organization\": \"<string>\"\n    },\n    {\n      \"url\": \"<string>\",\n      \"repository\": \"<string>\",\n      \"organization\": \"<string>\"\n    }\n  ],\n  \"returnImageAsFile\": \"<boolean>\",\n  \"fileOptions\": {\n    \"create\": \"<boolean>\",\n    \"linkAccess\": \"<string>\"\n  },\n  \"background\": \"<boolean>\",\n  \"theme\": \"light\",\n  \"imageQuality\": 2\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ebdb70d4-4684-4e48-96c5-1fc3375fc612",
+              "name": "Generation unable to complete",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "render",
+                    "prompt"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"<string>\",\n  \"diagramType\": \"<string>\",\n  \"mode\": \"premium\",\n  \"priorRequestId\": \"<string>\",\n  \"attachments\": [\n    {\n      \"filename\": \"<string>\",\n      \"mimeType\": \"<string>\",\n      \"content\": \"<string>\"\n    },\n    {\n      \"filename\": \"<string>\",\n      \"mimeType\": \"<string>\",\n      \"content\": \"<string>\"\n    }\n  ],\n  \"contextId\": \"<string>\",\n  \"templateId\": \"<string>\",\n  \"inlineCodeEdit\": {\n    \"code\": \"<string>\",\n    \"diagramType\": \"<string>\"\n  },\n  \"gitContexts\": [\n    {\n      \"url\": \"<string>\",\n      \"repository\": \"<string>\",\n      \"organization\": \"<string>\"\n    },\n    {\n      \"url\": \"<string>\",\n      \"repository\": \"<string>\",\n      \"organization\": \"<string>\"\n    }\n  ],\n  \"returnImageAsFile\": \"<boolean>\",\n  \"fileOptions\": {\n    \"create\": \"<boolean>\",\n    \"linkAccess\": \"<string>\"\n  },\n  \"background\": \"<boolean>\",\n  \"theme\": \"light\",\n  \"imageQuality\": 2\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1d5b1c57-8a5a-4146-87c9-5d8501ebd898",
+              "name": "Service temporarily unavailable or rate limited",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "render",
+                    "prompt"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"<string>\",\n  \"diagramType\": \"<string>\",\n  \"mode\": \"premium\",\n  \"priorRequestId\": \"<string>\",\n  \"attachments\": [\n    {\n      \"filename\": \"<string>\",\n      \"mimeType\": \"<string>\",\n      \"content\": \"<string>\"\n    },\n    {\n      \"filename\": \"<string>\",\n      \"mimeType\": \"<string>\",\n      \"content\": \"<string>\"\n    }\n  ],\n  \"contextId\": \"<string>\",\n  \"templateId\": \"<string>\",\n  \"inlineCodeEdit\": {\n    \"code\": \"<string>\",\n    \"diagramType\": \"<string>\"\n  },\n  \"gitContexts\": [\n    {\n      \"url\": \"<string>\",\n      \"repository\": \"<string>\",\n      \"organization\": \"<string>\"\n    },\n    {\n      \"url\": \"<string>\",\n      \"repository\": \"<string>\",\n      \"organization\": \"<string>\"\n    }\n  ],\n  \"returnImageAsFile\": \"<boolean>\",\n  \"fileOptions\": {\n    \"create\": \"<boolean>\",\n    \"linkAccess\": \"<string>\"\n  },\n  \"background\": \"<boolean>\",\n  \"theme\": \"light\",\n  \"imageQuality\": 2\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7b8ab544-aa27-434d-8c37-2e0f4d7441af",
+          "name": "Generate diagram from Eraser DSL code",
+          "request": {
+            "name": "Generate diagram from Eraser DSL code",
+            "description": {
+              "content": "Generates a diagram image from Eraser DSL canvas elements. Use this endpoint when you have structured DSL code and want to render it into a PNG image or create an editable Eraser file.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "render",
+                "elements"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"elements\": [\n    {\n      \"type\": \"<string>\",\n      \"diagramType\": \"<string>\",\n      \"code\": \"<string>\",\n      \"freeformElements\": [\n        \"<object>\",\n        \"<object>\"\n      ]\n    },\n    {\n      \"type\": \"<string>\",\n      \"diagramType\": \"<string>\",\n      \"code\": \"<string>\",\n      \"freeformElements\": [\n        \"<object>\",\n        \"<object>\"\n      ]\n    }\n  ],\n  \"background\": \"<boolean>\",\n  \"theme\": \"light\",\n  \"imageQuality\": 2,\n  \"returnImageAsFile\": \"<boolean>\",\n  \"fileOptions\": {\n    \"create\": \"<boolean>\",\n    \"linkAccess\": \"<string>\"\n  },\n  \"title\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3b7e4205-d220-4660-82a6-f38c8c6143d1",
+              "name": "Diagram rendered successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "render",
+                    "elements"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"elements\": [\n    {\n      \"type\": \"<string>\",\n      \"diagramType\": \"<string>\",\n      \"code\": \"<string>\",\n      \"freeformElements\": [\n        \"<object>\",\n        \"<object>\"\n      ]\n    },\n    {\n      \"type\": \"<string>\",\n      \"diagramType\": \"<string>\",\n      \"code\": \"<string>\",\n      \"freeformElements\": [\n        \"<object>\",\n        \"<object>\"\n      ]\n    }\n  ],\n  \"background\": \"<boolean>\",\n  \"theme\": \"light\",\n  \"imageQuality\": 2,\n  \"returnImageAsFile\": \"<boolean>\",\n  \"fileOptions\": {\n    \"create\": \"<boolean>\",\n    \"linkAccess\": \"<string>\"\n  },\n  \"title\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"imageUrl\": \"string\",\n  \"createEraserFileUrl\": \"string\",\n  \"fileUrl\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "978c400f-bf79-4bea-a3f9-9eafc872399a",
+              "name": "Missing elements parameter or validation failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "render",
+                    "elements"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"elements\": [\n    {\n      \"type\": \"<string>\",\n      \"diagramType\": \"<string>\",\n      \"code\": \"<string>\",\n      \"freeformElements\": [\n        \"<object>\",\n        \"<object>\"\n      ]\n    },\n    {\n      \"type\": \"<string>\",\n      \"diagramType\": \"<string>\",\n      \"code\": \"<string>\",\n      \"freeformElements\": [\n        \"<object>\",\n        \"<object>\"\n      ]\n    }\n  ],\n  \"background\": \"<boolean>\",\n  \"theme\": \"light\",\n  \"imageQuality\": 2,\n  \"returnImageAsFile\": \"<boolean>\",\n  \"fileOptions\": {\n    \"create\": \"<boolean>\",\n    \"linkAccess\": \"<string>\"\n  },\n  \"title\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "88485b00-bc5d-418b-af77-f353d9234f24",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "render",
+                    "elements"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"elements\": [\n    {\n      \"type\": \"<string>\",\n      \"diagramType\": \"<string>\",\n      \"code\": \"<string>\",\n      \"freeformElements\": [\n        \"<object>\",\n        \"<object>\"\n      ]\n    },\n    {\n      \"type\": \"<string>\",\n      \"diagramType\": \"<string>\",\n      \"code\": \"<string>\",\n      \"freeformElements\": [\n        \"<object>\",\n        \"<object>\"\n      ]\n    }\n  ],\n  \"background\": \"<boolean>\",\n  \"theme\": \"light\",\n  \"imageQuality\": 2,\n  \"returnImageAsFile\": \"<boolean>\",\n  \"fileOptions\": {\n    \"create\": \"<boolean>\",\n    \"linkAccess\": \"<string>\"\n  },\n  \"title\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9039da48-8505-4cf6-b70d-655ef765563c",
+              "name": "Generation failure",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "render",
+                    "elements"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"elements\": [\n    {\n      \"type\": \"<string>\",\n      \"diagramType\": \"<string>\",\n      \"code\": \"<string>\",\n      \"freeformElements\": [\n        \"<object>\",\n        \"<object>\"\n      ]\n    },\n    {\n      \"type\": \"<string>\",\n      \"diagramType\": \"<string>\",\n      \"code\": \"<string>\",\n      \"freeformElements\": [\n        \"<object>\",\n        \"<object>\"\n      ]\n    }\n  ],\n  \"background\": \"<boolean>\",\n  \"theme\": \"light\",\n  \"imageQuality\": 2,\n  \"returnImageAsFile\": \"<boolean>\",\n  \"fileOptions\": {\n    \"create\": \"<boolean>\",\n    \"linkAccess\": \"<string>\"\n  },\n  \"title\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "96618801-5933-4503-98c7-bb0955f0482c",
+              "name": "Service temporarily unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "render",
+                    "elements"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"elements\": [\n    {\n      \"type\": \"<string>\",\n      \"diagramType\": \"<string>\",\n      \"code\": \"<string>\",\n      \"freeformElements\": [\n        \"<object>\",\n        \"<object>\"\n      ]\n    },\n    {\n      \"type\": \"<string>\",\n      \"diagramType\": \"<string>\",\n      \"code\": \"<string>\",\n      \"freeformElements\": [\n        \"<object>\",\n        \"<object>\"\n      ]\n    }\n  ],\n  \"background\": \"<boolean>\",\n  \"theme\": \"light\",\n  \"imageQuality\": 2,\n  \"returnImageAsFile\": \"<boolean>\",\n  \"fileOptions\": {\n    \"create\": \"<boolean>\",\n    \"linkAccess\": \"<string>\"\n  },\n  \"title\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://app.eraser.io",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "02343c31-8e56-4377-bead-517aac1fd1b2",
+    "name": "Eraser AI Requests Diagrams (AI) API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Eraser REST API provides programmatic access to diagram generation, file management, folder management, audit logs, and team usage metrics. Developers can generate diagrams from natural language prompts or Eraser DSL, create and manage files and diagrams on the canvas, and retrieve aggregated usage metrics. API access requires a team API token and is available on Starter, Business, and Enterprise paid plans with usage-based billing for API calls beyond plan credits.\n\nContact Support:\n Name: Eraser Support\n Email: hello@eraser.io",
+      "type": "text/plain"
+    }
+  }
+}
