@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Eraser AI Requests API
   description: The Eraser REST API provides programmatic access to diagram generation, file management, folder management, audit logs, and team usage metrics. Developers can generate diagrams from natural language prompts or Eraser DSL, create and manage files and diagrams on the canvas, and retrieve aggregated usage metrics. API access requires a team API token and is available on Starter, Business, and Enterprise paid plans with usage-based billing for API calls beyond plan credits.
@@ -81,6 +81,26 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    AiRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique AI request identifier
+        inputs:
+          type: array
+          items:
+            $ref: '#/components/schemas/AiRequestInput'
+        outputs:
+          type: array
+          items:
+            $ref: '#/components/schemas/AiRequestOutput'
+        mode:
+          type: string
+          enum:
+          - standard
+          - premium
+          description: AI model tier used
     AiRequestInput:
       type: object
       properties:
@@ -115,26 +135,12 @@ components:
         provider:
           type: string
           description: Git provider (when type is 'repository')
-    AiRequest:
+    Error:
       type: object
       properties:
-        id:
+        error:
           type: string
-          description: Unique AI request identifier
-        inputs:
-          type: array
-          items:
-            $ref: '#/components/schemas/AiRequestInput'
-        outputs:
-          type: array
-          items:
-            $ref: '#/components/schemas/AiRequestOutput'
-        mode:
-          type: string
-          enum:
-          - standard
-          - premium
-          description: AI model tier used
+          description: Error message describing what went wrong
     AiRequestOutput:
       type: object
       properties:
@@ -162,12 +168,6 @@ components:
       - flowchart-diagram
       - bpmn-diagram
       description: Type of Eraser diagram
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error message describing what went wrong
   securitySchemes:
     bearerAuth:
       type: http

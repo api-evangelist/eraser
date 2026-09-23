@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Eraser AI Requests Audit Logs API
+  title: Eraser Audit Logs API
   description: The Eraser REST API provides programmatic access to diagram generation, file management, folder management, audit logs, and team usage metrics. Developers can generate diagrams from natural language prompts or Eraser DSL, create and manage files and diagrams on the canvas, and retrieve aggregated usage metrics. API access requires a team API token and is available on Starter, Business, and Enterprise paid plans with usage-based billing for API calls beyond plan credits.
   version: v1.0
   contact:
@@ -136,28 +136,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    AuditLogResponse:
-      type: object
-      required:
-      - events
-      - hasMore
-      - serverTime
-      properties:
-        events:
-          type: array
-          items:
-            $ref: '#/components/schemas/AuditEventECS'
-        nextCursor:
-          type: string
-          nullable: true
-          description: Cursor for pagination
-        hasMore:
-          type: boolean
-          description: Whether more events are available
-        serverTime:
-          type: string
-          format: date-time
-          description: Current server time
     AuditEventECS:
       type: object
       properties:
@@ -202,6 +180,29 @@ components:
               type: string
             metadata:
               type: object
+    AuditLogResponse:
+      type: object
+      required:
+      - events
+      - hasMore
+      - serverTime
+      properties:
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/AuditEventECS'
+        nextCursor:
+          type:
+          - string
+          - 'null'
+          description: Cursor for pagination
+        hasMore:
+          type: boolean
+          description: Whether more events are available
+        serverTime:
+          type: string
+          format: date-time
+          description: Current server time
     Error:
       type: object
       properties:

@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Eraser AI Requests Folders API
+  title: Eraser Folders API
   description: The Eraser REST API provides programmatic access to diagram generation, file management, folder management, audit logs, and team usage metrics. Developers can generate diagrams from natural language prompts or Eraser DSL, create and manage files and diagrams on the canvas, and retrieve aggregated usage metrics. API access requires a team API token and is available on Starter, Business, and Enterprise paid plans with usage-based billing for API calls beyond plan credits.
   version: v1.0
   contact:
@@ -299,6 +299,47 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    CreateFolderRequest:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: Folder name
+        parentFolderId:
+          type:
+          - string
+          - 'null'
+          description: Parent folder ID, or null for root-level
+        order:
+          type: integer
+          description: Sort order among siblings. Auto-assigned if omitted.
+    SuccessResponse:
+      type: object
+      required:
+      - success
+      properties:
+        success:
+          type: boolean
+          description: Whether the operation was successful
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message describing what went wrong
+    UpdateFolderRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: New folder name
+        parentFolderId:
+          type:
+          - string
+          - 'null'
+          description: New parent folder ID, or null for root
     Folder:
       type: object
       required:
@@ -334,48 +375,10 @@ components:
           format: date-time
           description: ISO 8601 last updated timestamp
         parentFolderId:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Parent folder ID, or null if root-level
-    SuccessResponse:
-      type: object
-      required:
-      - success
-      properties:
-        success:
-          type: boolean
-          description: Whether the operation was successful
-    CreateFolderRequest:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-          description: Folder name
-        parentFolderId:
-          type: string
-          nullable: true
-          description: Parent folder ID, or null for root-level
-        order:
-          type: integer
-          description: Sort order among siblings. Auto-assigned if omitted.
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error message describing what went wrong
-    UpdateFolderRequest:
-      type: object
-      properties:
-        name:
-          type: string
-          description: New folder name
-        parentFolderId:
-          type: string
-          nullable: true
-          description: New parent folder ID, or null for root
     CreateFolderResponse:
       type: object
       required:

@@ -1,0 +1,30 @@
+# Front Door AI Index — eraser — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: eraser
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: www.eraser.io
+  final_host: www.eraser.io
+  ownership: own
+  owner: eraser
+  shares_host_with: null
+  inherited_from: null
+  verdict: scored
+  score: 24
+  host_score: 24
+  density: 30.85
+  words: 778
+  tiers:
+    agentic: 4
+    core: 18
+    model: 2
+  ambiguous: 6
+  top_terms:
+    AI: 18
+    agent: 6
+    MCP: 3
+    ChatGPT: 1
+    Claude: 1
+    prompts: 1

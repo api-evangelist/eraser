@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Eraser AI Requests Diagram Elements API
+  title: Eraser Diagram Elements API
   description: The Eraser REST API provides programmatic access to diagram generation, file management, folder management, audit logs, and team usage metrics. Developers can generate diagrams from natural language prompts or Eraser DSL, create and manage files and diagrams on the canvas, and retrieve aggregated usage metrics. API access requires a team API token and is available on Starter, Business, and Enterprise paid plans with usage-based billing for API calls beyond plan credits.
   version: v1.0
   contact:
@@ -342,14 +342,6 @@ components:
           type: string
           format: date-time
           description: ISO 8601 last modification timestamp
-    UpdateDiagramRequest:
-      type: object
-      required:
-      - code
-      properties:
-        code:
-          type: string
-          description: New Eraser DSL code for the diagram
     DeleteDiagramResponse:
       type: object
       required:
@@ -362,21 +354,6 @@ components:
         fileUrl:
           type: string
           description: URL of the containing file
-    DiagramType:
-      type: string
-      enum:
-      - sequence-diagram
-      - entity-relationship-diagram
-      - cloud-architecture-diagram
-      - flowchart-diagram
-      - bpmn-diagram
-      description: Type of Eraser diagram
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error message describing what went wrong
     CreateDiagramRequest:
       type: object
       required:
@@ -387,6 +364,29 @@ components:
         code:
           type: string
           description: Eraser DSL code for the diagram. If omitted, creates an empty diagram.
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message describing what went wrong
+    UpdateDiagramRequest:
+      type: object
+      required:
+      - code
+      properties:
+        code:
+          type: string
+          description: New Eraser DSL code for the diagram
+    DiagramType:
+      type: string
+      enum:
+      - sequence-diagram
+      - entity-relationship-diagram
+      - cloud-architecture-diagram
+      - flowchart-diagram
+      - bpmn-diagram
+      description: Type of Eraser diagram
   securitySchemes:
     bearerAuth:
       type: http
