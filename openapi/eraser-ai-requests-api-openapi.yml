@@ -81,26 +81,21 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    AiRequest:
+    DiagramType:
+      type: string
+      enum:
+      - sequence-diagram
+      - entity-relationship-diagram
+      - cloud-architecture-diagram
+      - flowchart-diagram
+      - bpmn-diagram
+      description: Type of Eraser diagram
+    Error:
       type: object
       properties:
-        id:
+        error:
           type: string
-          description: Unique AI request identifier
-        inputs:
-          type: array
-          items:
-            $ref: '#/components/schemas/AiRequestInput'
-        outputs:
-          type: array
-          items:
-            $ref: '#/components/schemas/AiRequestOutput'
-        mode:
-          type: string
-          enum:
-          - standard
-          - premium
-          description: AI model tier used
+          description: Error message describing what went wrong
     AiRequestInput:
       type: object
       properties:
@@ -135,12 +130,26 @@ components:
         provider:
           type: string
           description: Git provider (when type is 'repository')
-    Error:
+    AiRequest:
       type: object
       properties:
-        error:
+        id:
           type: string
-          description: Error message describing what went wrong
+          description: Unique AI request identifier
+        inputs:
+          type: array
+          items:
+            $ref: '#/components/schemas/AiRequestInput'
+        outputs:
+          type: array
+          items:
+            $ref: '#/components/schemas/AiRequestOutput'
+        mode:
+          type: string
+          enum:
+          - standard
+          - premium
+          description: AI model tier used
     AiRequestOutput:
       type: object
       properties:
@@ -159,15 +168,6 @@ components:
         imageUrl:
           type: string
           description: URL of the rendered PNG image
-    DiagramType:
-      type: string
-      enum:
-      - sequence-diagram
-      - entity-relationship-diagram
-      - cloud-architecture-diagram
-      - flowchart-diagram
-      - bpmn-diagram
-      description: Type of Eraser diagram
   securitySchemes:
     bearerAuth:
       type: http

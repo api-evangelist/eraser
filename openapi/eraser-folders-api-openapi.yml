@@ -299,47 +299,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    CreateFolderRequest:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-          description: Folder name
-        parentFolderId:
-          type:
-          - string
-          - 'null'
-          description: Parent folder ID, or null for root-level
-        order:
-          type: integer
-          description: Sort order among siblings. Auto-assigned if omitted.
-    SuccessResponse:
-      type: object
-      required:
-      - success
-      properties:
-        success:
-          type: boolean
-          description: Whether the operation was successful
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error message describing what went wrong
-    UpdateFolderRequest:
-      type: object
-      properties:
-        name:
-          type: string
-          description: New folder name
-        parentFolderId:
-          type:
-          - string
-          - 'null'
-          description: New parent folder ID, or null for root
     Folder:
       type: object
       required:
@@ -379,6 +338,20 @@ components:
           - string
           - 'null'
           description: Parent folder ID, or null if root-level
+    SuccessResponse:
+      type: object
+      required:
+      - success
+      properties:
+        success:
+          type: boolean
+          description: Whether the operation was successful
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message describing what went wrong
     CreateFolderResponse:
       type: object
       required:
@@ -387,6 +360,33 @@ components:
         id:
           type: string
           description: ID of the created folder
+    UpdateFolderRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: New folder name
+        parentFolderId:
+          type:
+          - string
+          - 'null'
+          description: New parent folder ID, or null for root
+    CreateFolderRequest:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: Folder name
+        parentFolderId:
+          type:
+          - string
+          - 'null'
+          description: Parent folder ID, or null for root-level
+        order:
+          type: integer
+          description: Sort order among siblings. Auto-assigned if omitted.
   securitySchemes:
     bearerAuth:
       type: http

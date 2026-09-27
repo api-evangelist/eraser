@@ -318,6 +318,51 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    DiagramType:
+      type: string
+      enum:
+      - sequence-diagram
+      - entity-relationship-diagram
+      - cloud-architecture-diagram
+      - flowchart-diagram
+      - bpmn-diagram
+      description: Type of Eraser diagram
+    CreateDiagramRequest:
+      type: object
+      required:
+      - diagramType
+      properties:
+        diagramType:
+          $ref: '#/components/schemas/DiagramType'
+        code:
+          type: string
+          description: Eraser DSL code for the diagram. If omitted, creates an empty diagram.
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message describing what went wrong
+    DeleteDiagramResponse:
+      type: object
+      required:
+      - deleted
+      - fileUrl
+      properties:
+        deleted:
+          type: boolean
+          description: Whether the diagram was successfully deleted
+        fileUrl:
+          type: string
+          description: URL of the containing file
+    UpdateDiagramRequest:
+      type: object
+      required:
+      - code
+      properties:
+        code:
+          type: string
+          description: New Eraser DSL code for the diagram
     Diagram:
       type: object
       required:
@@ -342,51 +387,6 @@ components:
           type: string
           format: date-time
           description: ISO 8601 last modification timestamp
-    DeleteDiagramResponse:
-      type: object
-      required:
-      - deleted
-      - fileUrl
-      properties:
-        deleted:
-          type: boolean
-          description: Whether the diagram was successfully deleted
-        fileUrl:
-          type: string
-          description: URL of the containing file
-    CreateDiagramRequest:
-      type: object
-      required:
-      - diagramType
-      properties:
-        diagramType:
-          $ref: '#/components/schemas/DiagramType'
-        code:
-          type: string
-          description: Eraser DSL code for the diagram. If omitted, creates an empty diagram.
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error message describing what went wrong
-    UpdateDiagramRequest:
-      type: object
-      required:
-      - code
-      properties:
-        code:
-          type: string
-          description: New Eraser DSL code for the diagram
-    DiagramType:
-      type: string
-      enum:
-      - sequence-diagram
-      - entity-relationship-diagram
-      - cloud-architecture-diagram
-      - flowchart-diagram
-      - bpmn-diagram
-      description: Type of Eraser diagram
   securitySchemes:
     bearerAuth:
       type: http

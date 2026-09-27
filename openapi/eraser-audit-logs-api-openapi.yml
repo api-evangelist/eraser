@@ -136,6 +136,35 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message describing what went wrong
+    AuditLogResponse:
+      type: object
+      required:
+      - events
+      - hasMore
+      - serverTime
+      properties:
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/AuditEventECS'
+        nextCursor:
+          type:
+          - string
+          - 'null'
+          description: Cursor for pagination
+        hasMore:
+          type: boolean
+          description: Whether more events are available
+        serverTime:
+          type: string
+          format: date-time
+          description: Current server time
     AuditEventECS:
       type: object
       properties:
@@ -180,35 +209,6 @@ components:
               type: string
             metadata:
               type: object
-    AuditLogResponse:
-      type: object
-      required:
-      - events
-      - hasMore
-      - serverTime
-      properties:
-        events:
-          type: array
-          items:
-            $ref: '#/components/schemas/AuditEventECS'
-        nextCursor:
-          type:
-          - string
-          - 'null'
-          description: Cursor for pagination
-        hasMore:
-          type: boolean
-          description: Whether more events are available
-        serverTime:
-          type: string
-          format: date-time
-          description: Current server time
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error message describing what went wrong
   securitySchemes:
     bearerAuth:
       type: http

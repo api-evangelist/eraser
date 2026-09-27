@@ -312,123 +312,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    ArchiveFileResponse:
-      type: object
-      required:
-      - archived
-      - fileUrl
-      properties:
-        archived:
-          type: boolean
-          description: Whether the file was successfully archived
-        fileUrl:
-          type: string
-          description: URL of the archived file
-    LinkAccess:
-      type: string
-      enum:
-      - no-link-access
-      - anyone-with-link-can-edit
-      - publicly-viewable
-      - publicly-editable
-      - sso-readable
-      - sso-editable
-      description: File link access permission level
-    CanvasElement:
-      type: object
-      required:
-      - type
-      properties:
-        type:
-          type: string
-          description: Element category (e.g., diagram, rectangle, ellipse)
-        diagramType:
-          $ref: '#/components/schemas/DiagramType'
-        code:
-          type: string
-          description: Eraser DSL code for diagram rendering
-        x:
-          type: number
-          description: Horizontal canvas position
-        y:
-          type: number
-          description: Vertical canvas position
-        width:
-          type: number
-          description: Element width
-        height:
-          type: number
-          description: Element height
-    FileList:
-      type: object
-      required:
-      - files
-      properties:
-        files:
-          type: array
-          items:
-            $ref: '#/components/schemas/File'
-        nextCursor:
-          type:
-          - string
-          - 'null'
-          description: Cursor for retrieving the next page of results
-    CreateFileRequest:
-      type: object
-      properties:
-        title:
-          type: string
-          description: Title of the file. Defaults to "Untitled".
-        folderId:
-          type: string
-          description: Identifier for the folder destination
-        document:
-          type: string
-          description: Markdown content for the file's document. Supports diagram code blocks.
-        linkAccess:
-          $ref: '#/components/schemas/LinkAccess'
-        elements:
-          type: array
-          items:
-            $ref: '#/components/schemas/CanvasElement'
-          description: Canvas elements (diagrams, shapes, etc.)
-    CanvasElementWithId:
-      allOf:
-      - $ref: '#/components/schemas/CanvasElement'
-      - type: object
-        properties:
-          id:
-            type: string
-            description: Unique element identifier
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error message describing what went wrong
-    FileContent:
-      type: object
-      properties:
-        elements:
-          type: array
-          items:
-            $ref: '#/components/schemas/CanvasElementWithId'
-          description: Canvas elements in the file
-        document:
-          type: string
-          description: Markdown content of the file's document
-    UpdateFileRequest:
-      type: object
-      properties:
-        title:
-          type: string
-          description: New title for the file
-        folderId:
-          type: string
-          description: ID of the folder to move the file to
-        document:
-          type: string
-          description: New markdown content. Supports diagram code blocks converted to embedded diagrams.
     DiagramType:
       type: string
       enum:
@@ -476,6 +359,103 @@ components:
           description: ISO 8601 last modification timestamp
         linkAccess:
           $ref: '#/components/schemas/LinkAccess'
+    CanvasElement:
+      type: object
+      required:
+      - type
+      properties:
+        type:
+          type: string
+          description: Element category (e.g., diagram, rectangle, ellipse)
+        diagramType:
+          $ref: '#/components/schemas/DiagramType'
+        code:
+          type: string
+          description: Eraser DSL code for diagram rendering
+        x:
+          type: number
+          description: Horizontal canvas position
+        y:
+          type: number
+          description: Vertical canvas position
+        width:
+          type: number
+          description: Element width
+        height:
+          type: number
+          description: Element height
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message describing what went wrong
+    ArchiveFileResponse:
+      type: object
+      required:
+      - archived
+      - fileUrl
+      properties:
+        archived:
+          type: boolean
+          description: Whether the file was successfully archived
+        fileUrl:
+          type: string
+          description: URL of the archived file
+    FileContent:
+      type: object
+      properties:
+        elements:
+          type: array
+          items:
+            $ref: '#/components/schemas/CanvasElementWithId'
+          description: Canvas elements in the file
+        document:
+          type: string
+          description: Markdown content of the file's document
+    FileList:
+      type: object
+      required:
+      - files
+      properties:
+        files:
+          type: array
+          items:
+            $ref: '#/components/schemas/File'
+        nextCursor:
+          type:
+          - string
+          - 'null'
+          description: Cursor for retrieving the next page of results
+    CreateFileRequest:
+      type: object
+      properties:
+        title:
+          type: string
+          description: Title of the file. Defaults to "Untitled".
+        folderId:
+          type: string
+          description: Identifier for the folder destination
+        document:
+          type: string
+          description: Markdown content for the file's document. Supports diagram code blocks.
+        linkAccess:
+          $ref: '#/components/schemas/LinkAccess'
+        elements:
+          type: array
+          items:
+            $ref: '#/components/schemas/CanvasElement'
+          description: Canvas elements (diagrams, shapes, etc.)
+    LinkAccess:
+      type: string
+      enum:
+      - no-link-access
+      - anyone-with-link-can-edit
+      - publicly-viewable
+      - publicly-editable
+      - sso-readable
+      - sso-editable
+      description: File link access permission level
     FileWithContent:
       allOf:
       - $ref: '#/components/schemas/File'
@@ -483,6 +463,26 @@ components:
         properties:
           content:
             $ref: '#/components/schemas/FileContent'
+    CanvasElementWithId:
+      allOf:
+      - $ref: '#/components/schemas/CanvasElement'
+      - type: object
+        properties:
+          id:
+            type: string
+            description: Unique element identifier
+    UpdateFileRequest:
+      type: object
+      properties:
+        title:
+          type: string
+          description: New title for the file
+        folderId:
+          type: string
+          description: ID of the folder to move the file to
+        document:
+          type: string
+          description: New markdown content. Supports diagram code blocks converted to embedded diagrams.
   securitySchemes:
     bearerAuth:
       type: http

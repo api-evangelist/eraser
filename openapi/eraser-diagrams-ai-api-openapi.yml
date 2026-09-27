@@ -119,50 +119,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    GeneratedDiagram:
-      type: object
-      properties:
-        diagramType:
-          $ref: '#/components/schemas/DiagramTypeWithFreeform'
-        code:
-          type: string
-          description: Generated Eraser DSL code
-    GenerateFromDslRequest:
-      type: object
-      required:
-      - elements
-      properties:
-        elements:
-          type: array
-          items:
-            $ref: '#/components/schemas/DslElement'
-          description: Eraser canvas element objects defining the diagram
-        background:
-          type: boolean
-          description: Transparent (false) or solid (true) background. Defaults to false.
-        theme:
-          type: string
-          enum:
-          - light
-          - dark
-          default: light
-          description: Diagram color theme
-        imageQuality:
-          type: integer
-          enum:
-          - 1
-          - 2
-          - 3
-          default: 2
-          description: Resolution multiplier (1=low, 2=medium, 3=high)
-        returnImageAsFile:
-          type: boolean
-          description: Return image as file stream instead of URL
-        fileOptions:
-          $ref: '#/components/schemas/FileOptions'
-        title:
-          type: string
-          description: Title for the created Eraser file (when fileOptions.create is true)
     DiagramTypeWithFreeform:
       type: string
       enum:
@@ -173,18 +129,31 @@ components:
       - bpmn-diagram
       - freeform-diagram
       description: Type of Eraser diagram (including freeform)
-    GenerateFromDslResponse:
+    FileOptions:
       type: object
       properties:
-        imageUrl:
+        create:
+          type: boolean
+          description: Whether to create an Eraser file from the generated diagram
+        linkAccess:
+          $ref: '#/components/schemas/LinkAccess'
+    InlineCodeEdit:
+      type: object
+      required:
+      - code
+      - diagramType
+      properties:
+        code:
           type: string
-          description: URL of the generated PNG diagram image
-        createEraserFileUrl:
+          description: Existing diagram code to edit
+        diagramType:
+          $ref: '#/components/schemas/DiagramTypeWithFreeform'
+    Error:
+      type: object
+      properties:
+        error:
           type: string
-          description: URL to create an editable Eraser file (omitted if fileOptions.create is true)
-        fileUrl:
-          type: string
-          description: URL to created Eraser file (returned only when fileOptions.create is true)
+          description: Error message describing what went wrong
     GenerateFromPromptResponse:
       type: object
       properties:
@@ -210,32 +179,6 @@ components:
           items:
             type: string
           description: File paths from Git context (when gitContexts provided)
-    FileAttachment:
-      type: object
-      required:
-      - filename
-      - mimeType
-      - content
-      properties:
-        filename:
-          type: string
-          description: Name of the attached file
-        mimeType:
-          type: string
-          enum:
-          - image/png
-          - image/jpeg
-          - application/pdf
-          description: MIME type of the attachment
-        content:
-          type: string
-          description: Base64-encoded file content
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error message describing what went wrong
     DslElement:
       type: object
       required:
@@ -257,14 +200,68 @@ components:
           items:
             type: object
           description: Array of element objects (required for freeform-diagram only)
-    FileOptions:
+    GitContext:
       type: object
       properties:
-        create:
-          type: boolean
-          description: Whether to create an Eraser file from the generated diagram
-        linkAccess:
-          $ref: '#/components/schemas/LinkAccess'
+        url:
+          type: string
+          description: Public Git repository URL
+        repository:
+          type: string
+          description: Private repository name
+        organization:
+          type: string
+          description: Organization name for private repositories
+    GeneratedDiagram:
+      type: object
+      properties:
+        diagramType:
+          $ref: '#/components/schemas/DiagramTypeWithFreeform'
+        code:
+          type: string
+          description: Generated Eraser DSL code
+    GenerateFromDslResponse:
+      type: object
+      properties:
+        imageUrl:
+          type: string
+          description: URL of the generated PNG diagram image
+        createEraserFileUrl:
+          type: string
+          description: URL to create an editable Eraser file (omitted if fileOptions.create is true)
+        fileUrl:
+          type: string
+          description: URL to created Eraser file (returned only when fileOptions.create is true)
+    LinkAccess:
+      type: string
+      enum:
+      - no-link-access
+      - anyone-with-link-can-edit
+      - publicly-viewable
+      - publicly-editable
+      - sso-readable
+      - sso-editable
+      description: File link access permission level
+    FileAttachment:
+      type: object
+      required:
+      - filename
+      - mimeType
+      - content
+      properties:
+        filename:
+          type: string
+          description: Name of the attached file
+        mimeType:
+          type: string
+          enum:
+          - image/png
+          - image/jpeg
+          - application/pdf
+          description: MIME type of the attachment
+        content:
+          type: string
+          description: Base64-encoded file content
     GenerateFromPromptRequest:
       type: object
       required:
@@ -326,39 +323,42 @@ components:
           - 3
           default: 2
           description: Resolution multiplier (1=low, 2=medium, 3=high)
-    InlineCodeEdit:
+    GenerateFromDslRequest:
       type: object
       required:
-      - code
-      - diagramType
+      - elements
       properties:
-        code:
+        elements:
+          type: array
+          items:
+            $ref: '#/components/schemas/DslElement'
+          description: Eraser canvas element objects defining the diagram
+        background:
+          type: boolean
+          description: Transparent (false) or solid (true) background. Defaults to false.
+        theme:
           type: string
-          description: Existing diagram code to edit
-        diagramType:
-          $ref: '#/components/schemas/DiagramTypeWithFreeform'
-    GitContext:
-      type: object
-      properties:
-        url:
+          enum:
+          - light
+          - dark
+          default: light
+          description: Diagram color theme
+        imageQuality:
+          type: integer
+          enum:
+          - 1
+          - 2
+          - 3
+          default: 2
+          description: Resolution multiplier (1=low, 2=medium, 3=high)
+        returnImageAsFile:
+          type: boolean
+          description: Return image as file stream instead of URL
+        fileOptions:
+          $ref: '#/components/schemas/FileOptions'
+        title:
           type: string
-          description: Public Git repository URL
-        repository:
-          type: string
-          description: Private repository name
-        organization:
-          type: string
-          description: Organization name for private repositories
-    LinkAccess:
-      type: string
-      enum:
-      - no-link-access
-      - anyone-with-link-can-edit
-      - publicly-viewable
-      - publicly-editable
-      - sso-readable
-      - sso-editable
-      description: File link access permission level
+          description: Title for the created Eraser file (when fileOptions.create is true)
   securitySchemes:
     bearerAuth:
       type: http
