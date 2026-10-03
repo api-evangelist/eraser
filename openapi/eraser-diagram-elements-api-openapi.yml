@@ -318,31 +318,14 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    DiagramType:
-      type: string
-      enum:
-      - sequence-diagram
-      - entity-relationship-diagram
-      - cloud-architecture-diagram
-      - flowchart-diagram
-      - bpmn-diagram
-      description: Type of Eraser diagram
-    CreateDiagramRequest:
+    UpdateDiagramRequest:
       type: object
       required:
-      - diagramType
+      - code
       properties:
-        diagramType:
-          $ref: '#/components/schemas/DiagramType'
         code:
           type: string
-          description: Eraser DSL code for the diagram. If omitted, creates an empty diagram.
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error message describing what went wrong
+          description: New Eraser DSL code for the diagram
     DeleteDiagramResponse:
       type: object
       required:
@@ -355,14 +338,6 @@ components:
         fileUrl:
           type: string
           description: URL of the containing file
-    UpdateDiagramRequest:
-      type: object
-      required:
-      - code
-      properties:
-        code:
-          type: string
-          description: New Eraser DSL code for the diagram
     Diagram:
       type: object
       required:
@@ -387,6 +362,31 @@ components:
           type: string
           format: date-time
           description: ISO 8601 last modification timestamp
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message describing what went wrong
+    CreateDiagramRequest:
+      type: object
+      required:
+      - diagramType
+      properties:
+        diagramType:
+          $ref: '#/components/schemas/DiagramType'
+        code:
+          type: string
+          description: Eraser DSL code for the diagram. If omitted, creates an empty diagram.
+    DiagramType:
+      type: string
+      enum:
+      - sequence-diagram
+      - entity-relationship-diagram
+      - cloud-architecture-diagram
+      - flowchart-diagram
+      - bpmn-diagram
+      description: Type of Eraser diagram
   securitySchemes:
     bearerAuth:
       type: http

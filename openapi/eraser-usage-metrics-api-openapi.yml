@@ -83,37 +83,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error message describing what went wrong
-    UsageMemberMetrics:
-      type: object
-      properties:
-        email:
-          type: string
-          description: Member email address
-        displayName:
-          type: string
-          description: Member display name
-        filesCreated:
-          type: integer
-          description: Number of files created in range
-        filesViewed:
-          type: integer
-          description: Number of unique files viewed in range
-        fileViews:
-          type: integer
-          description: Total file view count in range
-        aiCreditsUsed:
-          type: integer
-          description: AI credits consumed in range
-        lastActive:
-          type: string
-          format: date-time
-          description: ISO 8601 timestamp of last activity
     UsageMetricsResponse:
       type: object
       required:
@@ -169,6 +138,37 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/UsageMemberMetrics'
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message describing what went wrong
+    UsageMemberMetrics:
+      type: object
+      properties:
+        email:
+          type: string
+          description: Member email address
+        displayName:
+          type: string
+          description: Member display name
+        filesCreated:
+          type: integer
+          description: Number of files created in range
+        filesViewed:
+          type: integer
+          description: Number of unique files viewed in range
+        fileViews:
+          type: integer
+          description: Total file view count in range
+        aiCreditsUsed:
+          type: integer
+          description: AI credits consumed in range
+        lastActive:
+          type: string
+          format: date-time
+          description: ISO 8601 timestamp of last activity
   securitySchemes:
     bearerAuth:
       type: http

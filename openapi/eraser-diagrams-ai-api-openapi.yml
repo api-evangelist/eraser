@@ -119,16 +119,27 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    DiagramTypeWithFreeform:
-      type: string
-      enum:
-      - sequence-diagram
-      - entity-relationship-diagram
-      - cloud-architecture-diagram
-      - flowchart-diagram
-      - bpmn-diagram
-      - freeform-diagram
-      description: Type of Eraser diagram (including freeform)
+    DslElement:
+      type: object
+      required:
+      - type
+      - diagramType
+      properties:
+        type:
+          type: string
+          enum:
+          - diagram
+          description: Element type (must be 'diagram')
+        diagramType:
+          $ref: '#/components/schemas/DiagramTypeWithFreeform'
+        code:
+          type: string
+          description: Eraser DSL code (required for all types except freeform-diagram)
+        freeformElements:
+          type: array
+          items:
+            type: object
+          description: Array of element objects (required for freeform-diagram only)
     FileOptions:
       type: object
       properties:
@@ -148,12 +159,16 @@ components:
           description: Existing diagram code to edit
         diagramType:
           $ref: '#/components/schemas/DiagramTypeWithFreeform'
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error message describing what went wrong
+    LinkAccess:
+      type: string
+      enum:
+      - no-link-access
+      - anyone-with-link-can-edit
+      - publicly-viewable
+      - publicly-editable
+      - sso-readable
+      - sso-editable
+      description: File link access permission level
     GenerateFromPromptResponse:
       type: object
       properties:
@@ -179,39 +194,6 @@ components:
           items:
             type: string
           description: File paths from Git context (when gitContexts provided)
-    DslElement:
-      type: object
-      required:
-      - type
-      - diagramType
-      properties:
-        type:
-          type: string
-          enum:
-          - diagram
-          description: Element type (must be 'diagram')
-        diagramType:
-          $ref: '#/components/schemas/DiagramTypeWithFreeform'
-        code:
-          type: string
-          description: Eraser DSL code (required for all types except freeform-diagram)
-        freeformElements:
-          type: array
-          items:
-            type: object
-          description: Array of element objects (required for freeform-diagram only)
-    GitContext:
-      type: object
-      properties:
-        url:
-          type: string
-          description: Public Git repository URL
-        repository:
-          type: string
-          description: Private repository name
-        organization:
-          type: string
-          description: Organization name for private repositories
     GeneratedDiagram:
       type: object
       properties:
@@ -220,48 +202,6 @@ components:
         code:
           type: string
           description: Generated Eraser DSL code
-    GenerateFromDslResponse:
-      type: object
-      properties:
-        imageUrl:
-          type: string
-          description: URL of the generated PNG diagram image
-        createEraserFileUrl:
-          type: string
-          description: URL to create an editable Eraser file (omitted if fileOptions.create is true)
-        fileUrl:
-          type: string
-          description: URL to created Eraser file (returned only when fileOptions.create is true)
-    LinkAccess:
-      type: string
-      enum:
-      - no-link-access
-      - anyone-with-link-can-edit
-      - publicly-viewable
-      - publicly-editable
-      - sso-readable
-      - sso-editable
-      description: File link access permission level
-    FileAttachment:
-      type: object
-      required:
-      - filename
-      - mimeType
-      - content
-      properties:
-        filename:
-          type: string
-          description: Name of the attached file
-        mimeType:
-          type: string
-          enum:
-          - image/png
-          - image/jpeg
-          - application/pdf
-          description: MIME type of the attachment
-        content:
-          type: string
-          description: Base64-encoded file content
     GenerateFromPromptRequest:
       type: object
       required:
@@ -359,6 +299,66 @@ components:
         title:
           type: string
           description: Title for the created Eraser file (when fileOptions.create is true)
+    FileAttachment:
+      type: object
+      required:
+      - filename
+      - mimeType
+      - content
+      properties:
+        filename:
+          type: string
+          description: Name of the attached file
+        mimeType:
+          type: string
+          enum:
+          - image/png
+          - image/jpeg
+          - application/pdf
+          description: MIME type of the attachment
+        content:
+          type: string
+          description: Base64-encoded file content
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message describing what went wrong
+    DiagramTypeWithFreeform:
+      type: string
+      enum:
+      - sequence-diagram
+      - entity-relationship-diagram
+      - cloud-architecture-diagram
+      - flowchart-diagram
+      - bpmn-diagram
+      - freeform-diagram
+      description: Type of Eraser diagram (including freeform)
+    GenerateFromDslResponse:
+      type: object
+      properties:
+        imageUrl:
+          type: string
+          description: URL of the generated PNG diagram image
+        createEraserFileUrl:
+          type: string
+          description: URL to create an editable Eraser file (omitted if fileOptions.create is true)
+        fileUrl:
+          type: string
+          description: URL to created Eraser file (returned only when fileOptions.create is true)
+    GitContext:
+      type: object
+      properties:
+        url:
+          type: string
+          description: Public Git repository URL
+        repository:
+          type: string
+          description: Private repository name
+        organization:
+          type: string
+          description: Organization name for private repositories
   securitySchemes:
     bearerAuth:
       type: http

@@ -338,6 +338,12 @@ components:
           - string
           - 'null'
           description: Parent folder ID, or null if root-level
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message describing what went wrong
     SuccessResponse:
       type: object
       required:
@@ -346,20 +352,6 @@ components:
         success:
           type: boolean
           description: Whether the operation was successful
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error message describing what went wrong
-    CreateFolderResponse:
-      type: object
-      required:
-      - id
-      properties:
-        id:
-          type: string
-          description: ID of the created folder
     UpdateFolderRequest:
       type: object
       properties:
@@ -371,6 +363,14 @@ components:
           - string
           - 'null'
           description: New parent folder ID, or null for root
+    CreateFolderResponse:
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: string
+          description: ID of the created folder
     CreateFolderRequest:
       type: object
       required:
