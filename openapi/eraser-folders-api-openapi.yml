@@ -299,6 +299,31 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    UpdateFolderRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: New folder name
+        parentFolderId:
+          type:
+          - string
+          - 'null'
+          description: New parent folder ID, or null for root
+    SuccessResponse:
+      type: object
+      required:
+      - success
+      properties:
+        success:
+          type: boolean
+          description: Whether the operation was successful
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message describing what went wrong
     Folder:
       type: object
       required:
@@ -338,31 +363,6 @@ components:
           - string
           - 'null'
           description: Parent folder ID, or null if root-level
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error message describing what went wrong
-    SuccessResponse:
-      type: object
-      required:
-      - success
-      properties:
-        success:
-          type: boolean
-          description: Whether the operation was successful
-    UpdateFolderRequest:
-      type: object
-      properties:
-        name:
-          type: string
-          description: New folder name
-        parentFolderId:
-          type:
-          - string
-          - 'null'
-          description: New parent folder ID, or null for root
     CreateFolderResponse:
       type: object
       required:

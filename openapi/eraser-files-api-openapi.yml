@@ -312,43 +312,25 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    ArchiveFileResponse:
-      type: object
-      required:
-      - archived
-      - fileUrl
-      properties:
-        archived:
-          type: boolean
-          description: Whether the file was successfully archived
-        fileUrl:
-          type: string
-          description: URL of the archived file
-    FileList:
-      type: object
-      required:
-      - files
-      properties:
-        files:
-          type: array
-          items:
-            $ref: '#/components/schemas/File'
-        nextCursor:
-          type:
-          - string
-          - 'null'
-          description: Cursor for retrieving the next page of results
-    FileContent:
-      type: object
-      properties:
-        elements:
-          type: array
-          items:
-            $ref: '#/components/schemas/CanvasElementWithId'
-          description: Canvas elements in the file
-        document:
-          type: string
-          description: Markdown content of the file's document
+    LinkAccess:
+      type: string
+      enum:
+      - no-link-access
+      - anyone-with-link-can-edit
+      - publicly-viewable
+      - publicly-editable
+      - sso-readable
+      - sso-editable
+      description: File link access permission level
+    DiagramType:
+      type: string
+      enum:
+      - sequence-diagram
+      - entity-relationship-diagram
+      - cloud-architecture-diagram
+      - flowchart-diagram
+      - bpmn-diagram
+      description: Type of Eraser diagram
     CanvasElement:
       type: object
       required:
@@ -374,28 +356,50 @@ components:
         height:
           type: number
           description: Element height
-    LinkAccess:
-      type: string
-      enum:
-      - no-link-access
-      - anyone-with-link-can-edit
-      - publicly-viewable
-      - publicly-editable
-      - sso-readable
-      - sso-editable
-      description: File link access permission level
-    UpdateFileRequest:
+    FileList:
+      type: object
+      required:
+      - files
+      properties:
+        files:
+          type: array
+          items:
+            $ref: '#/components/schemas/File'
+        nextCursor:
+          type:
+          - string
+          - 'null'
+          description: Cursor for retrieving the next page of results
+    FileContent:
+      type: object
+      properties:
+        elements:
+          type: array
+          items:
+            $ref: '#/components/schemas/CanvasElementWithId'
+          description: Canvas elements in the file
+        document:
+          type: string
+          description: Markdown content of the file's document
+    CreateFileRequest:
       type: object
       properties:
         title:
           type: string
-          description: New title for the file
+          description: Title of the file. Defaults to "Untitled".
         folderId:
           type: string
-          description: ID of the folder to move the file to
+          description: Identifier for the folder destination
         document:
           type: string
-          description: New markdown content. Supports diagram code blocks converted to embedded diagrams.
+          description: Markdown content for the file's document. Supports diagram code blocks.
+        linkAccess:
+          $ref: '#/components/schemas/LinkAccess'
+        elements:
+          type: array
+          items:
+            $ref: '#/components/schemas/CanvasElement'
+          description: Canvas elements (diagrams, shapes, etc.)
     File:
       type: object
       required:
@@ -434,6 +438,24 @@ components:
           description: ISO 8601 last modification timestamp
         linkAccess:
           $ref: '#/components/schemas/LinkAccess'
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message describing what went wrong
+    UpdateFileRequest:
+      type: object
+      properties:
+        title:
+          type: string
+          description: New title for the file
+        folderId:
+          type: string
+          description: ID of the folder to move the file to
+        document:
+          type: string
+          description: New markdown content. Supports diagram code blocks converted to embedded diagrams.
     CanvasElementWithId:
       allOf:
       - $ref: '#/components/schemas/CanvasElement'
@@ -442,12 +464,18 @@ components:
           id:
             type: string
             description: Unique element identifier
-    Error:
+    ArchiveFileResponse:
       type: object
+      required:
+      - archived
+      - fileUrl
       properties:
-        error:
+        archived:
+          type: boolean
+          description: Whether the file was successfully archived
+        fileUrl:
           type: string
-          description: Error message describing what went wrong
+          description: URL of the archived file
     FileWithContent:
       allOf:
       - $ref: '#/components/schemas/File'
@@ -455,34 +483,6 @@ components:
         properties:
           content:
             $ref: '#/components/schemas/FileContent'
-    CreateFileRequest:
-      type: object
-      properties:
-        title:
-          type: string
-          description: Title of the file. Defaults to "Untitled".
-        folderId:
-          type: string
-          description: Identifier for the folder destination
-        document:
-          type: string
-          description: Markdown content for the file's document. Supports diagram code blocks.
-        linkAccess:
-          $ref: '#/components/schemas/LinkAccess'
-        elements:
-          type: array
-          items:
-            $ref: '#/components/schemas/CanvasElement'
-          description: Canvas elements (diagrams, shapes, etc.)
-    DiagramType:
-      type: string
-      enum:
-      - sequence-diagram
-      - entity-relationship-diagram
-      - cloud-architecture-diagram
-      - flowchart-diagram
-      - bpmn-diagram
-      description: Type of Eraser diagram
   securitySchemes:
     bearerAuth:
       type: http

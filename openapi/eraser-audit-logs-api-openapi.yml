@@ -159,12 +159,6 @@ components:
           type: string
           format: date-time
           description: Current server time
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error message describing what went wrong
     AuditEventECS:
       type: object
       properties:
@@ -209,6 +203,12 @@ components:
               type: string
             metadata:
               type: object
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message describing what went wrong
   securitySchemes:
     bearerAuth:
       type: http
