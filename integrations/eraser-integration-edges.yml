@@ -35,7 +35,7 @@ edges:
     registered_name: io.eraser/eraser
     register_id: io.eraser/eraser
     detected_by: sweep-agent-tools.py
-    detected: '2026-10-14'
+    detected: '2026-10-15'
   mcp_registry:
     servers:
     - io.eraser/eraser
