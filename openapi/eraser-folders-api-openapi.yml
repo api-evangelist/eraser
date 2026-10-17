@@ -299,6 +299,14 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    CreateFolderResponse:
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: string
+          description: ID of the created folder
     UpdateFolderRequest:
       type: object
       properties:
@@ -310,20 +318,6 @@ components:
           - string
           - 'null'
           description: New parent folder ID, or null for root
-    SuccessResponse:
-      type: object
-      required:
-      - success
-      properties:
-        success:
-          type: boolean
-          description: Whether the operation was successful
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error message describing what went wrong
     Folder:
       type: object
       required:
@@ -363,14 +357,6 @@ components:
           - string
           - 'null'
           description: Parent folder ID, or null if root-level
-    CreateFolderResponse:
-      type: object
-      required:
-      - id
-      properties:
-        id:
-          type: string
-          description: ID of the created folder
     CreateFolderRequest:
       type: object
       required:
@@ -387,6 +373,20 @@ components:
         order:
           type: integer
           description: Sort order among siblings. Auto-assigned if omitted.
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message describing what went wrong
+    SuccessResponse:
+      type: object
+      required:
+      - success
+      properties:
+        success:
+          type: boolean
+          description: Whether the operation was successful
   securitySchemes:
     bearerAuth:
       type: http

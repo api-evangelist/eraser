@@ -312,64 +312,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    LinkAccess:
-      type: string
-      enum:
-      - no-link-access
-      - anyone-with-link-can-edit
-      - publicly-viewable
-      - publicly-editable
-      - sso-readable
-      - sso-editable
-      description: File link access permission level
-    DiagramType:
-      type: string
-      enum:
-      - sequence-diagram
-      - entity-relationship-diagram
-      - cloud-architecture-diagram
-      - flowchart-diagram
-      - bpmn-diagram
-      description: Type of Eraser diagram
-    CanvasElement:
-      type: object
-      required:
-      - type
-      properties:
-        type:
-          type: string
-          description: Element category (e.g., diagram, rectangle, ellipse)
-        diagramType:
-          $ref: '#/components/schemas/DiagramType'
-        code:
-          type: string
-          description: Eraser DSL code for diagram rendering
-        x:
-          type: number
-          description: Horizontal canvas position
-        y:
-          type: number
-          description: Vertical canvas position
-        width:
-          type: number
-          description: Element width
-        height:
-          type: number
-          description: Element height
-    FileList:
-      type: object
-      required:
-      - files
-      properties:
-        files:
-          type: array
-          items:
-            $ref: '#/components/schemas/File'
-        nextCursor:
-          type:
-          - string
-          - 'null'
-          description: Cursor for retrieving the next page of results
     FileContent:
       type: object
       properties:
@@ -438,24 +380,6 @@ components:
           description: ISO 8601 last modification timestamp
         linkAccess:
           $ref: '#/components/schemas/LinkAccess'
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error message describing what went wrong
-    UpdateFileRequest:
-      type: object
-      properties:
-        title:
-          type: string
-          description: New title for the file
-        folderId:
-          type: string
-          description: ID of the folder to move the file to
-        document:
-          type: string
-          description: New markdown content. Supports diagram code blocks converted to embedded diagrams.
     CanvasElementWithId:
       allOf:
       - $ref: '#/components/schemas/CanvasElement'
@@ -464,6 +388,47 @@ components:
           id:
             type: string
             description: Unique element identifier
+    DiagramType:
+      type: string
+      enum:
+      - sequence-diagram
+      - entity-relationship-diagram
+      - cloud-architecture-diagram
+      - flowchart-diagram
+      - bpmn-diagram
+      description: Type of Eraser diagram
+    CanvasElement:
+      type: object
+      required:
+      - type
+      properties:
+        type:
+          type: string
+          description: Element category (e.g., diagram, rectangle, ellipse)
+        diagramType:
+          $ref: '#/components/schemas/DiagramType'
+        code:
+          type: string
+          description: Eraser DSL code for diagram rendering
+        x:
+          type: number
+          description: Horizontal canvas position
+        y:
+          type: number
+          description: Vertical canvas position
+        width:
+          type: number
+          description: Element width
+        height:
+          type: number
+          description: Element height
+    FileWithContent:
+      allOf:
+      - $ref: '#/components/schemas/File'
+      - type: object
+        properties:
+          content:
+            $ref: '#/components/schemas/FileContent'
     ArchiveFileResponse:
       type: object
       required:
@@ -476,13 +441,48 @@ components:
         fileUrl:
           type: string
           description: URL of the archived file
-    FileWithContent:
-      allOf:
-      - $ref: '#/components/schemas/File'
-      - type: object
-        properties:
-          content:
-            $ref: '#/components/schemas/FileContent'
+    FileList:
+      type: object
+      required:
+      - files
+      properties:
+        files:
+          type: array
+          items:
+            $ref: '#/components/schemas/File'
+        nextCursor:
+          type:
+          - string
+          - 'null'
+          description: Cursor for retrieving the next page of results
+    LinkAccess:
+      type: string
+      enum:
+      - no-link-access
+      - anyone-with-link-can-edit
+      - publicly-viewable
+      - publicly-editable
+      - sso-readable
+      - sso-editable
+      description: File link access permission level
+    UpdateFileRequest:
+      type: object
+      properties:
+        title:
+          type: string
+          description: New title for the file
+        folderId:
+          type: string
+          description: ID of the folder to move the file to
+        document:
+          type: string
+          description: New markdown content. Supports diagram code blocks converted to embedded diagrams.
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message describing what went wrong
   securitySchemes:
     bearerAuth:
       type: http

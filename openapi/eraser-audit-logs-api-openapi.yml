@@ -136,6 +136,12 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message describing what went wrong
     AuditLogResponse:
       type: object
       required:
@@ -203,12 +209,6 @@ components:
               type: string
             metadata:
               type: object
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error message describing what went wrong
   securitySchemes:
     bearerAuth:
       type: http

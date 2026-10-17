@@ -81,41 +81,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    DiagramType:
-      type: string
-      enum:
-      - sequence-diagram
-      - entity-relationship-diagram
-      - cloud-architecture-diagram
-      - flowchart-diagram
-      - bpmn-diagram
-      description: Type of Eraser diagram
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error message describing what went wrong
-    AiRequest:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique AI request identifier
-        inputs:
-          type: array
-          items:
-            $ref: '#/components/schemas/AiRequestInput'
-        outputs:
-          type: array
-          items:
-            $ref: '#/components/schemas/AiRequestOutput'
-        mode:
-          type: string
-          enum:
-          - standard
-          - premium
-          description: AI model tier used
     AiRequestInput:
       type: object
       properties:
@@ -168,6 +133,41 @@ components:
         imageUrl:
           type: string
           description: URL of the rendered PNG image
+    DiagramType:
+      type: string
+      enum:
+      - sequence-diagram
+      - entity-relationship-diagram
+      - cloud-architecture-diagram
+      - flowchart-diagram
+      - bpmn-diagram
+      description: Type of Eraser diagram
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message describing what went wrong
+    AiRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique AI request identifier
+        inputs:
+          type: array
+          items:
+            $ref: '#/components/schemas/AiRequestInput'
+        outputs:
+          type: array
+          items:
+            $ref: '#/components/schemas/AiRequestOutput'
+        mode:
+          type: string
+          enum:
+          - standard
+          - premium
+          description: AI model tier used
   securitySchemes:
     bearerAuth:
       type: http
