@@ -1,4 +1,4 @@
-# Eraser (eraser)
+# Eraser
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,84 +64,171 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Eraser is an AI-powered diagramming and technical documentation platform designed for engineering teams. It provides a REST API for generating diagrams from natural language prompts or structured DSL, managing files and workspaces, and embedding interactive technical visuals into documentation workflows. The platform supports flow charts, ERDs, sequence diagrams, cloud architecture diagrams, and BPMN diagrams, and integrates with GitHub, VS Code, Notion, and Confluence. Eraser also provides an MCP server for AI agent-driven diagram automation.
+Eraser is an AI-powered diagramming and technical documentation platform designed for engineering teams. It provides a REST API for generating diagrams from natural language prompts or structured DSL, managing files and workspaces, and embedding interactive technical visuals into documentation workflows. The platform supports a wide range of diagram types including flow charts, ERDs, sequence diagrams, cloud architecture diagrams, and BPMN diagrams. Eraser integrates with tools such as GitHub, VS Code, Notion, and Confluence, and provides an MCP server for AI agent-driven diagram automation.
 
-APIs.json: https://raw.githubusercontent.com/api-evangelist/eraser/refs/heads/main/apis.yml
+**Areas:** Diagramming · Documentation · Artificial Intelligence · Technical Documentation · Architecture · Developer Tools
 
-Naftiko: https://github.com/naftiko/fleet?utm_source=api-evangelist&utm_medium=readme&utm_campaign=eraser-api-evangelist&utm_content=repo
+## Eraser on APIs.io
 
-## Tags
+Everything profiled for Eraser is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/eraser/](https://apis.io/providers/eraser/)** — or go straight to one of the APIs or properties below.
 
-- Diagrams
-- Documentation
-- AI
-- Technical Documentation
-- Diagramming
-- Architecture
-- Developer Tools
+### APIs (7)
 
-## APIs
+- [Eraser AI Requests API](https://apis.io/apis/eraser/eraser-ai-requests-api/) — Retrieve previously generated AI diagram requests
+- [Eraser Audit Logs API](https://apis.io/apis/eraser/eraser-audit-logs-api/) — Query audit events for compliance and monitoring
+- [Eraser Diagram Elements API](https://apis.io/apis/eraser/eraser-diagram-elements-api/) — Manage diagram elements within files
+- [Eraser Diagrams (AI) API](https://apis.io/apis/eraser/eraser-diagrams-ai-api/) — Generate diagrams from natural language prompts or Eraser DSL using AI
+- [Eraser Files API](https://apis.io/apis/eraser/eraser-files-api/) — Create and manage Eraser files
+- [Eraser Folders API](https://apis.io/apis/eraser/eraser-folders-api/) — Create and manage folders for organizing files
+- [Eraser Usage Metrics API](https://apis.io/apis/eraser/eraser-usage-metrics-api/) — Retrieve team usage and activity metrics
 
-### Eraser API
+### Published properties
 
-The Eraser REST API provides programmatic access to diagram generation, file management, folder management, audit logs, and team usage metrics. API access requires a team API token and is available on paid plans (Starter, Business, Enterprise) with usage-based billing for API calls.
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-- Documentation: https://docs.eraser.io/docs/eraser-api
-- API Reference: https://docs.eraser.io/reference
-- OpenAPI Spec: https://app.eraser.io/.well-known/api-spec.json
-- Quickstart: https://docs.eraser.io/docs/quickstart
+#### MCP servers (1)
 
-## Plans, Rate Limits, and FinOps
+Model Context Protocol servers that expose the API to agents.
 
-### Plans
+- [eraser](https://apis.io/servers/eraser/eraser/)
 
-Eraser offers four tiers:
+#### Agentic access (1)
 
-| Plan       | Price                        | AI Credits/Month | API Access |
-|------------|------------------------------|------------------|------------|
-| Free       | $0                           | 5                | No         |
-| Starter    | $15/member/month (annual)    | 40               | Yes        |
-| Business   | $45/member/month (annual)    | 250              | Yes        |
-| Enterprise | Custom                       | Unlimited        | Yes        |
+Which operations an agent can call, which act, and which need a human in the loop.
 
-Full plans detail: [plans/eraser-plans-pricing.yml](plans/eraser-plans-pricing.yml)
+- [Eraser Agentic Access](https://apis.io/agentic-access/eraser/eraser-agentic-access/)
 
-### Rate Limits
+#### JSON Schema (3)
 
-API calls are billed on a usage-based model with configurable monthly spending caps:
+The data models the API reads and writes.
 
-- `/render/prompt` (AI diagram generation): $0.80 per call ($80 per 100 calls)
-- `/render/elements` (DSL rendering): $0.20 per call ($20 per 100 calls)
-- Additional AI credits beyond plan: $0.60 per credit
+- [Eraser Diagram](https://apis.io/schemas/eraser/eraser-diagram/)
+- [Eraser File](https://apis.io/schemas/eraser/eraser-file/)
+- [Eraser Folder](https://apis.io/schemas/eraser/eraser-folder/)
 
-When 80% of the spending cap is reached, team admins receive an alert. API calls are blocked once the cap is fully consumed until the next calendar month.
+#### JSON-LD (1)
 
-Full rate limits detail: [rate-limits/eraser-rate-limits.yml](rate-limits/eraser-rate-limits.yml)
+Linked-data contexts for the provider's vocabulary.
 
-### FinOps
+- [Eraser Context](https://apis.io/jsonld/eraser/eraser-context/)
 
-Eraser uses a hybrid pricing model combining fixed per-seat subscriptions with variable usage-based billing. Key optimization strategies include preferring the `/render/elements` endpoint (75% cheaper than `/render/prompt`) for structured diagrams, setting conservative spending caps, and using the team usage metrics API for cost tracking.
+#### Vocabulary (1)
 
-Full FinOps detail: [finops/eraser-finops.yml](finops/eraser-finops.yml)
+The provider's domain terms, defined.
 
-## Timestamps
+- [Eraser Vocabulary](https://apis.io/vocabularies/eraser/eraser-vocabulary/)
 
-- Created: 2026-06-13
-- Modified: 2026-06-13
+#### Examples (2)
 
-## Common
+Example requests and responses.
 
-| Type          | URL                                                     |
-|---------------|---------------------------------------------------------|
-| Website       | https://www.eraser.io/                                  |
-| Documentation | https://docs.eraser.io/                                 |
-| API Reference | https://docs.eraser.io/reference                        |
-| GitHub Org    | https://github.com/eraserlabs                           |
-| LinkedIn      | https://www.linkedin.com/company/eraser                 |
-| Blog          | https://www.eraser.io/decision-node                     |
-| Pricing       | https://www.eraser.io/pricing                           |
-| X             | https://x.com/eraserlabs                                |
+- [Eraser Create File Example](https://apis.io/examples/eraser/eraser-create-file-example/)
+- [Eraser Generate Diagram Example](https://apis.io/examples/eraser/eraser-generate-diagram-example/)
 
-## Maintainers
+#### Collections (7)
 
-- Kin Lane (kin@apievangelist.com)
+Postman and Open Collection request collections.
+
+- [Eraser AI Requests API](https://apis.io/collections/eraser/open-eraser-ai-requests-api/)
+- [Eraser AI Requests Audit Logs API](https://apis.io/collections/eraser/open-eraser-audit-logs-api/)
+- [Eraser AI Requests Diagram Elements API](https://apis.io/collections/eraser/open-eraser-diagram-elements-api/)
+- [Eraser AI Requests Diagrams (AI) API](https://apis.io/collections/eraser/open-eraser-diagrams-ai-api/)
+- [Eraser AI Requests Files API](https://apis.io/collections/eraser/open-eraser-files-api/)
+- [Eraser AI Requests Folders API](https://apis.io/collections/eraser/open-eraser-folders-api/)
+- [Eraser AI Requests Usage Metrics API](https://apis.io/collections/eraser/open-eraser-usage-metrics-api/)
+
+#### Governance rules (1)
+
+Spectral rulesets for the provider's contracts.
+
+- [Eraser — jsonschema rules](https://apis.io/rules/eraser/eraser-jsonschema-spectral-rules/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Eraser Authentication](https://apis.io/security/eraser/eraser-authentication/)
+- [Eraser Domain Security](https://apis.io/security/eraser/eraser-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Eraser Plans Pricing](https://apis.io/plans/eraser/eraser-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Eraser Rate Limits](https://apis.io/rate-limits/eraser/eraser-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Eraser Finops](https://apis.io/finops/eraser/eraser-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.eraser.io/)
+- [Documentation](https://docs.eraser.io/)
+- [API reference](https://docs.eraser.io/reference)
+- [Pricing](https://www.eraser.io/pricing)
+- [Blog](https://www.eraser.io/decision-node)
+
+## API Evangelist rating
+
+**Kin Score 35.9** — thin · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 68.3 |
+| Contract quality | 62.4 |
+| Contract governance | 9.8 |
+| Operational transparency | 5.3 |
+| Developer ergonomics | 42.9 |
+| Access clarity | 18.4 |
+
+**Agent readiness 36.0** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | verified |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | verified |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | — |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 15.5** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/eraser/](https://apis.io/providers/eraser/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Eraser: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/eraser/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
